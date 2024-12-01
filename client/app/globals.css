@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --background: rgba(10, 10, 10);
+    --primary-color: rgba(20, 20, 20);
+    --secondary-color: rgba(8, 8, 8);
+    --text-color: rgba(102, 102, 102);
+    --accent-color: rgba(255, 252, 250);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --background: rgba(10, 10, 10);
+        --primary-color: rgba(20, 20, 20);
+        --secondary-color: rgba(8, 8, 8);
+        --text-color: rgba(102, 102, 102);
+        --accent-color: rgba(255, 252, 250);
+    }
+}
+
+@layer components {
+    .text-stroke {
+        -webkit-text-stroke-width: 1px;
+        -webkit-text-stroke-color: var(--text-color);
+        color: transparent;
+    }
+}
+
+body {
+    color: var(--text-color);
+    background: var(--background);
+    font-family: Arial, Helvetica, sans-serif;
+}

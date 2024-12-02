@@ -11,9 +11,12 @@ export default {
             colors: {
                 background: 'var(--background)',
                 foreground: 'var(--foreground)',
+                'primary-main': 'var(--primary-main)',
+                'secondary-main': 'var(--secondary-main)',
                 'primary-color': 'var(--primary-color)',
                 'secondary-color': 'var(--secondary-color)',
                 'accent-color': 'var(--accent-color)',
+                'text-color': 'var(--text-color)',
             },
             fontSize: {
                 xs: '0.6rem',

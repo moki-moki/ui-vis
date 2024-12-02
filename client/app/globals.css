@@ -2,21 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --background: rgba(10, 10, 10);
-    --primary-color: rgba(20, 20, 20);
-    --secondary-color: rgba(8, 8, 8);
-    --text-color: rgba(102, 102, 102);
-    --accent-color: rgba(255, 252, 250);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
     :root {
-        --background: rgba(10, 10, 10);
-        --primary-color: rgba(20, 20, 20);
-        --secondary-color: rgba(8, 8, 8);
-        --text-color: rgba(102, 102, 102);
-        --accent-color: rgba(255, 252, 250);
+        --primary-main: #141414;
+        --secondary-main: #080808;
+
+        --background: #0a0a0a;
+        --primary-color: #141414;
+        --secondary-color: #080808;
+        --text-color: #666666;
+        --accent-color: #fffcfa;
     }
 }
 

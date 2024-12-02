@@ -1,7 +1,7 @@
 export default function Home() {
     return (
         <main className="my-10 max-w-screen-2xl mx-auto font-[family-name:var(--font-geist-sans)]">
-            <section className="flex gap-5 w-full">
+            <section className="flex gap-5 w-full justify-around">
                 <div>
                     <h1 className="text-4xl text-primary-color">
                         <span className="text-stroke">Visualize</span> Your

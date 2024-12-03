@@ -13,6 +13,7 @@ export default {
                 foreground: 'var(--foreground)',
                 'primary-main': 'var(--primary-main)',
                 'secondary-main': 'var(--secondary-main)',
+                'border-color': 'var(--border-color)',
                 'primary-color': 'var(--primary-color)',
                 'secondary-color': 'var(--secondary-color)',
                 'accent-color': 'var(--accent-color)',

@@ -12,10 +12,8 @@ interface Props {
 }
 
 const DEFAULT = {
-    'primary-main': '#141414',
-    'secondary-main': '#080808',
-    background: '#0a0a0a',
     'primary-color': '#141414',
+    'secondary-main': '#080808',
     'secondary-color': '#080808',
     'text-color': '#666666',
     'accent-color': '#fffcfa',
@@ -57,12 +55,10 @@ const ColorPicker = ({ label, type }: Props) => {
     }, []);
 
     return (
-        <div
-            className={`relative w-full h-12 cursor-pointer rounded-xl overflow-hidden bg-${type}-color`}
-        >
+        <div className={`relative w-full h-12 cursor-pointer rounded-xl`}>
             <label
                 htmlFor={`${type}-color`}
-                className={`block text-color text-center cursor-pointer text-sm text-background uppercase font-bold relative w-full h-full z-10`}
+                className={`block text-accent-main text-center cursor-pointer text-sm uppercase font-bold relative`}
             >
                 {label}
             </label>
@@ -71,7 +67,8 @@ const ColorPicker = ({ label, type }: Props) => {
                 name={`${type}-color`}
                 id={`${type}-color`}
                 onChange={onChangeHandler}
-                className="border-none absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-xl -z-10 h-full w-full"
+                className="border-none rounded-xl -z-10 h-8 w-full cursor-pointer"
+                value={colors[`${type}-color`]}
             />
         </div>
     );

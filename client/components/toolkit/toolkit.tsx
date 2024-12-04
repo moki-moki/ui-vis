@@ -1,6 +1,8 @@
 import React from 'react';
 
 import ColorPicker from './color-picker';
+import Button from '../ui/button';
+import { RotateCcw } from 'lucide-react';
 
 const Toolkit = () => {
     return (
@@ -10,6 +12,12 @@ const Toolkit = () => {
                 <ColorPicker label="Secondary" type="secondary" />
                 <ColorPicker label="Text" type="text" />
                 <ColorPicker label="Accent" type="accent" />
+                <Button
+                    type="button"
+                    className="h-12 bg-none px-4 py-2 border-border-color border-2 rounded-xl text-accent-main hover:bg-accent-main hover:text-text-color"
+                >
+                    <RotateCcw size={20} />
+                </Button>
             </div>
         </div>
     );

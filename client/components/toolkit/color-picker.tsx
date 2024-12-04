@@ -55,7 +55,7 @@ const ColorPicker = ({ label, type }: Props) => {
     }, []);
 
     return (
-        <div className={`relative w-full h-12 cursor-pointer rounded-xl`}>
+        <div className={`relative w-full cursor-pointer rounded-xl`}>
             <label
                 htmlFor={`${type}-color`}
                 className={`block text-accent-main text-center cursor-pointer text-sm uppercase font-bold relative`}
@@ -67,7 +67,7 @@ const ColorPicker = ({ label, type }: Props) => {
                 name={`${type}-color`}
                 id={`${type}-color`}
                 onChange={onChangeHandler}
-                className="border-none rounded-xl -z-10 h-8 w-full cursor-pointer"
+                className="border-none rounded-xl -z-10 w-full cursor-pointer"
                 value={colors[`${type}-color`]}
             />
         </div>

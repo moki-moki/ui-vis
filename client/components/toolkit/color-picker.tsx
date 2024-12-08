@@ -5,22 +5,15 @@ import { ChangeEvent, useEffect } from 'react';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 import { Input } from '../ui/input';
+import { DEFAULT_COLORS } from '@/utils/colors';
 
 interface Props {
     label: string;
     type: 'primary' | 'secondary' | 'text' | 'accent';
 }
 
-const DEFAULT = {
-    'primary-color': '#141414',
-    'secondary-main': '#080808',
-    'secondary-color': '#080808',
-    'text-color': '#666666',
-    'accent-color': '#fffcfa',
-};
-
 const ColorPicker = ({ label, type }: Props) => {
-    const [colors, setColors] = useLocalStorage('colors', DEFAULT);
+    const [colors, setColors] = useLocalStorage('colors', DEFAULT_COLORS);
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         document.documentElement.style.setProperty(
@@ -33,7 +26,6 @@ const ColorPicker = ({ label, type }: Props) => {
 
     useEffect(() => {
         const storedColors = localStorage.getItem('colors');
-
         if (storedColors) {
             document.documentElement.style.setProperty(
                 '--primary-color',
@@ -53,6 +45,8 @@ const ColorPicker = ({ label, type }: Props) => {
             );
         }
     }, []);
+
+    console.log(colors[`${type}-color`]);
 
     return (
         <div className={`relative w-full cursor-pointer rounded-xl`}>

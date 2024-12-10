@@ -3,9 +3,9 @@
 import { ChangeEvent, useEffect } from 'react';
 
 import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { DEFAULT_COLORS } from '@/utils/colors';
 
 import { Input } from '../ui/input';
-import { DEFAULT_COLORS } from '@/utils/colors';
 
 interface Props {
     label: string;
@@ -45,8 +45,6 @@ const ColorPicker = ({ label, type }: Props) => {
             );
         }
     }, []);
-
-    console.log(colors[`${type}-color`]);
 
     return (
         <div className={`relative w-full cursor-pointer rounded-xl`}>

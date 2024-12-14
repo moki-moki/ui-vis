@@ -3,6 +3,7 @@ import { ChangeEvent, useEffect } from 'react';
 import { DEFAULT_COLORS } from '../../data/colors';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import ColorInput from './color-input';
+import Dice from './dice';
 
 const Toolkit = () => {
   const [colors, setColors] = useLocalStorage('colors', DEFAULT_COLORS);
@@ -25,7 +26,7 @@ const Toolkit = () => {
   }, []);
 
   return (
-    <div className="bg-slate-500/30 backdrop-blur-lg p-5 flex justify-between items-center max-w-4xl m-auto absolute bottom-2 left-0 right-0 rounded-xl">
+    <div className="bg-slate-500/30 backdrop-blur-lg p-5 flex justify-evenly items-center max-w-4xl m-auto absolute bottom-2 left-0 right-0 rounded-xl">
       <ColorInput
         type="primary"
         color={colors.primary}
@@ -46,6 +47,7 @@ const Toolkit = () => {
         color={colors.accent}
         changeColorHandler={changeColorHandler}
       />
+      <Dice />
     </div>
   );
 };

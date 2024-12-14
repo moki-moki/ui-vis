@@ -1,4 +1,5 @@
 import chroma from 'chroma-js';
+
 import { ColorsI } from '../types/colors';
 
 const randomColors = Array.from({ length: 50 }, () => chroma.random().hex());

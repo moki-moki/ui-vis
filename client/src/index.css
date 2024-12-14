@@ -5,7 +5,16 @@
 :root {
   --primary-color: #141414;
   --secondary-color: #080808;
-  --secondary-accent-color: #e4ebd4;
   --text-color: #666666;
   --accent-color: #fffcfac0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  font-family: 'Montserrat', sans-serif;
 }

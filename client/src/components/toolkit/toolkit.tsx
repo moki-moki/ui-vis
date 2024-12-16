@@ -1,29 +1,32 @@
-import { ChangeEvent, useEffect } from 'react';
+import { ChangeEvent } from 'react';
 
 import { DEFAULT_COLORS } from '../../data/colors';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import ColorInput from './color-input';
 import Dice from './dice';
+import { useMutateColors } from '../../hooks/useMutateColors';
+import { applyColorsToRoot, generateScheme } from '../../utils/colors';
 
 const Toolkit = () => {
   const [colors, setColors] = useLocalStorage('colors', DEFAULT_COLORS);
+  useMutateColors(colors);
 
   const changeColorHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setColors((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     document.body.style.setProperty(`--${e.target.name}-color`, e.target.value);
   };
 
-  useEffect(() => {
-    const storedColors = localStorage.getItem('colors');
-
-    if (storedColors) {
-      const parsedValue = JSON.parse(storedColors);
-      Object.keys(parsedValue).forEach((key) => {
-        console.log(key, parsedValue[key]);
-        document.body.style.setProperty(`--${key}-color`, parsedValue[key]);
-      });
-    }
-  }, []);
+  const generateColors = () => {
+    const colorScheme = generateScheme('monochromatic');
+    const newState = {
+      primary: colorScheme[0],
+      secondary: colorScheme[1],
+      text: colorScheme[2],
+      accent: colorScheme[3],
+    };
+    setColors(newState);
+    applyColorsToRoot(colorScheme);
+  };
 
   return (
     <div className="bg-slate-500/30 backdrop-blur-lg p-5 flex justify-evenly items-center max-w-4xl m-auto absolute bottom-2 left-0 right-0 rounded-xl">
@@ -47,7 +50,7 @@ const Toolkit = () => {
         color={colors.accent}
         changeColorHandler={changeColorHandler}
       />
-      <Dice />
+      <Dice generateColors={generateColors} />
     </div>
   );
 };

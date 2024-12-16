@@ -3,7 +3,11 @@ import { useState } from 'react';
 
 import Button from '../ui/button';
 
-const Dice = () => {
+interface Props {
+  generateColors: () => void;
+}
+
+const Dice = ({ generateColors }: Props) => {
   const [colorMenu, setColorMenu] = useState<boolean>(false);
 
   const menuToggler = () => setColorMenu((prev) => !prev);
@@ -39,7 +43,11 @@ const Dice = () => {
             </Button>
           </li>
           <li className="hover:bg-accent-color rounded-xl px-1">
-            <Button className="w-full text-start" type="button">
+            <Button
+              className="w-full text-start"
+              type="button"
+              onClick={() => generateColors()}
+            >
               Monochromatic
             </Button>
           </li>

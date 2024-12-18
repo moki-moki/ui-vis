@@ -73,10 +73,11 @@ export default [
       },
     },
     rules: {
+      'import/no-named-as-default-member': 0,
       'react/prop-types': 'off',
       'react/react-in-jsx-scope': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
-
+      'no-console': 'error',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -87,11 +88,20 @@ export default [
       'import/order': [
         'error',
         {
-          groups: [
-            ['builtin', 'external'],
-            ['internal', 'parent', 'sibling', 'index'],
+          groups: ['builtin', 'external', 'internal', 'type'],
+          pathGroups: [
+            {
+              pattern: 'react',
+              group: 'external',
+              position: 'before',
+            },
           ],
+          pathGroupsExcludedImportTypes: ['react'],
           'newlines-between': 'always',
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
         },
       ],
 

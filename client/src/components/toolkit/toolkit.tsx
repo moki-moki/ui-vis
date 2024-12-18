@@ -1,9 +1,9 @@
 import { ChangeEvent, useEffect } from 'react';
 
-import { DEFAULT_COLORS } from '../../data/colors';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 import ColorInput from './color-input';
 import Dice from './dice';
+import { DEFAULT_COLORS } from '../../data/colors';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 const Toolkit = () => {
   const [colors, setColors] = useLocalStorage('colors', DEFAULT_COLORS);
@@ -19,7 +19,6 @@ const Toolkit = () => {
     if (storedColors) {
       const parsedValue = JSON.parse(storedColors);
       Object.keys(parsedValue).forEach((key) => {
-        console.log(key, parsedValue[key]);
         document.body.style.setProperty(`--${key}-color`, parsedValue[key]);
       });
     }

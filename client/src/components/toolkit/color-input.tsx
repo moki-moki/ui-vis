@@ -9,7 +9,6 @@ interface Props {
 }
 
 const ColorInput = ({ color, type, changeColorHandler }: Props) => {
-  console.log(color);
   return (
     <div>
       <span className="block uppercase text-sm font-bold tracking-wide">

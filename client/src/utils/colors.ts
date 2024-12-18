@@ -2,6 +2,17 @@ import chroma from 'chroma-js';
 
 const randomColors = Array.from({ length: 50 }, () => chroma.random().hex());
 
+const ajustHue = (baseColor: string, precent: number) =>
+  chroma(baseColor).set(
+    'hsl.h',
+    (chroma(baseColor).get('hsl.h') - precent + 360) % 360,
+  );
+
+const generateBackgroundColor = (baseColor: string) =>
+  chroma.mix(baseColor, 'white', 0.9);
+
+const textColor = (baseColor: string) => chroma.mix(baseColor, 'black', 0.9);
+
 export const generateScheme = (type: string): string[] => {
   const baseColor = chroma.random().hex();
 
@@ -9,16 +20,22 @@ export const generateScheme = (type: string): string[] => {
 
   switch (type) {
     case 'monochromatic':
-      newColors = chroma
-        .scale([baseColor, chroma(baseColor).darken(2)])
-        .colors(5); // 5 shades of monochromatic color
+      {
+        const colors = chroma
+          .scale([
+            generateBackgroundColor(baseColor),
+            baseColor,
+            textColor(baseColor),
+          ])
+          .colors(11);
+        newColors = [colors[0], colors[2], colors[4], colors[10], colors[6]];
+      }
       break;
     case 'complementary':
       newColors = [
         baseColor,
-        chroma(baseColor)
-          .set('hsl.h', (chroma(baseColor).get('hsl.h') + 180) % 360)
-          .hex(),
+        ajustHue(baseColor, 30).hex(),
+        ajustHue(baseColor, 50).hex(),
       ];
       break;
 

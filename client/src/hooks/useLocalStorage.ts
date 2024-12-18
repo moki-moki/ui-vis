@@ -18,7 +18,6 @@ export const useLocalStorage = <T>(
   });
 
   useEffect(() => {
-    console.log('fires????');
     localStorage.setItem(key, JSON.stringify(state));
   }, [state, key]);
 

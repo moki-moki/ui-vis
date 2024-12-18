@@ -9,6 +9,7 @@ import { applyColorsToRoot, generateScheme } from '../../utils/colors';
 
 const Toolkit = () => {
   const [colors, setColors] = useLocalStorage('colors', DEFAULT_COLORS);
+
   useMutateColors(colors);
 
   const changeColorHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -18,12 +19,15 @@ const Toolkit = () => {
 
   const generateColors = () => {
     const colorScheme = generateScheme('monochromatic');
+
     const newState = {
-      primary: colorScheme[0],
-      secondary: colorScheme[1],
-      text: colorScheme[2],
-      accent: colorScheme[3],
+      background: colorScheme[0],
+      primary: colorScheme[1],
+      secondary: colorScheme[2],
+      text: colorScheme[3],
+      accent: colorScheme[4],
     };
+
     setColors(newState);
     applyColorsToRoot(colorScheme);
   };

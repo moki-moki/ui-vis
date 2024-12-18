@@ -1,7 +1,5 @@
 import chroma from 'chroma-js';
 
-const randomColors = Array.from({ length: 50 }, () => chroma.random().hex());
-
 const ajustHue = (baseColor: string, precent: number) =>
   chroma(baseColor).set(
     'hsl.h',

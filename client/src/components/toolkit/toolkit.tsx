@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react';
 
-import { DEFAULT_COLORS } from '../../data/colors';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 import ColorInput from './color-input';
 import Dice from './dice';
+import { DEFAULT_COLORS } from '../../data/colors';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useMutateColors } from '../../hooks/useMutateColors';
 import { applyColorsToRoot, generateScheme } from '../../utils/colors';
 

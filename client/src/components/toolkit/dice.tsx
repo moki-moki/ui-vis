@@ -2,10 +2,11 @@ import { useState } from 'react';
 
 import { ArrowUp, Dice5 } from 'lucide-react';
 
+import { ColorType } from './toolkit';
 import Button from '../ui/button';
 
 interface Props {
-  generateColors: () => void;
+  generateColors: (type: ColorType) => void;
 }
 
 const Dice = ({ generateColors }: Props) => {
@@ -47,13 +48,17 @@ const Dice = ({ generateColors }: Props) => {
             <Button
               className="w-full text-start"
               type="button"
-              onClick={() => generateColors()}
+              onClick={() => generateColors('monochromatic')}
             >
               Monochromatic
             </Button>
           </li>
           <li className="hover:bg-accent-color rounded-xl px-1">
-            <Button className="w-full text-start" type="button">
+            <Button
+              className="w-full text-start"
+              type="button"
+              onClick={() => generateColors('complementary')}
+            >
               Complementary
             </Button>
           </li>

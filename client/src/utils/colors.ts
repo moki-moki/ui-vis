@@ -1,5 +1,9 @@
 import chroma from 'chroma-js';
 
+const keys = ['background', 'text', 'primary', 'secondary', 'accent'] as const;
+
+type MyObj = Record<(typeof keys)[number], string>;
+
 const ajustHue = (baseColor: string, precent: number) =>
   chroma(baseColor).set(
     'hsl.h',
@@ -7,12 +11,15 @@ const ajustHue = (baseColor: string, precent: number) =>
   );
 
 const generateBackgroundColor = (baseColor: string) =>
-  chroma.mix(baseColor, 'white', 0.9);
+  chroma.mix(baseColor, 'white', 0.9).hex();
 
-const textColor = (baseColor: string) => chroma.mix(baseColor, 'black', 0.9);
+const textColor = (baseColor: string) =>
+  chroma.mix(baseColor, 'black', 0.9).hex();
 
-export const generateScheme = (type: string): string[] => {
+export const generateScheme = (type: string): MyObj => {
   const baseColor = chroma.random().hex();
+
+  const obj: Partial<MyObj> = {};
 
   let newColors: string[] = [];
 
@@ -26,15 +33,25 @@ export const generateScheme = (type: string): string[] => {
             textColor(baseColor),
           ])
           .colors(11);
-        newColors = [colors[0], colors[2], colors[4], colors[10], colors[6]];
+        newColors = [colors[0], colors[10], colors[4], colors[2], colors[6]];
+
+        keys.forEach((key, idx) => {
+          obj[key] = newColors[idx];
+        });
       }
       break;
     case 'complementary':
-      newColors = [
-        baseColor,
-        ajustHue(baseColor, 30).hex(),
-        ajustHue(baseColor, 50).hex(),
-      ];
+      {
+        const colors = [
+          generateBackgroundColor(baseColor),
+          baseColor,
+          ajustHue(baseColor, 30).hex(),
+          textColor(baseColor),
+          ajustHue(baseColor, 50).hex(),
+        ];
+
+        newColors = colors;
+      }
       break;
 
     case 'analogous':
@@ -53,12 +70,11 @@ export const generateScheme = (type: string): string[] => {
       break;
   }
 
-  return newColors;
+  return obj as MyObj;
 };
 
-export const applyColorsToRoot = (colors: string[]) => {
-  document.documentElement.style.setProperty(`--primary-color`, colors[0]);
-  document.documentElement.style.setProperty(`--secondary-color`, colors[1]);
-  document.documentElement.style.setProperty(`--accent-color`, colors[2]);
-  document.documentElement.style.setProperty(`--text-color`, colors[3]);
+export const applyColorsToRoot = (colors: Record<string, string>) => {
+  Object.keys(colors).forEach((key) =>
+    document.documentElement.style.setProperty(`--${key}-color`, colors[key]),
+  );
 };

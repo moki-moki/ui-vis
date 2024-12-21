@@ -7,6 +7,8 @@ import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useMutateColors } from '../../hooks/useMutateColors';
 import { applyColorsToRoot, generateScheme } from '../../utils/colors';
 
+export type ColorType = 'monochromatic' | 'complementary' | 'analogous';
+
 const Toolkit = () => {
   const [colors, setColors] = useLocalStorage('colors', DEFAULT_COLORS);
 
@@ -17,18 +19,10 @@ const Toolkit = () => {
     document.body.style.setProperty(`--${e.target.name}-color`, e.target.value);
   };
 
-  const generateColors = () => {
-    const colorScheme = generateScheme('monochromatic');
+  const generateColors = (type: ColorType) => {
+    const colorScheme = generateScheme(type);
 
-    const newState = {
-      background: colorScheme[0],
-      primary: colorScheme[1],
-      secondary: colorScheme[2],
-      text: colorScheme[3],
-      accent: colorScheme[4],
-    };
-
-    setColors(newState);
+    setColors(colorScheme);
     applyColorsToRoot(colorScheme);
   };
 

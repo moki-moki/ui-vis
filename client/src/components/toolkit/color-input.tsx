@@ -21,9 +21,9 @@ const ColorInput = ({ color, type, changeColorHandler }: Props) => {
       ></label>
       <Input
         onChange={changeColorHandler}
-        defaultValue={color}
         name={type}
         id={type}
+        value={color}
         type="color"
         className="bg-lime-700 hidden"
       />

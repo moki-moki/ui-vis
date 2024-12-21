@@ -1,13 +1,19 @@
 import chroma from 'chroma-js';
 
+type ColorsObj = Record<(typeof keys)[number], string>;
+
 const keys = ['background', 'text', 'primary', 'secondary', 'accent'] as const;
 
-type MyObj = Record<(typeof keys)[number], string>;
-
-const ajustHue = (baseColor: string, precent: number) =>
+const ajustHue = (
+  baseColor: string,
+  precent: number,
+  operation: 'minus' | 'plus',
+) =>
   chroma(baseColor).set(
     'hsl.h',
-    (chroma(baseColor).get('hsl.h') - precent + 360) % 360,
+    (operation === 'minus'
+      ? chroma(baseColor).get('hsl.h') - precent + 360
+      : chroma(baseColor).get('hsl.h') + precent) % 360,
   );
 
 const generateBackgroundColor = (baseColor: string) =>
@@ -16,10 +22,10 @@ const generateBackgroundColor = (baseColor: string) =>
 const textColor = (baseColor: string) =>
   chroma.mix(baseColor, 'black', 0.9).hex();
 
-export const generateScheme = (type: string): MyObj => {
+export const generateScheme = (type: string): ColorsObj => {
   const baseColor = chroma.random().hex();
 
-  const obj: Partial<MyObj> = {};
+  const obj: Partial<ColorsObj> = {};
 
   let newColors: string[] = [];
 
@@ -42,35 +48,38 @@ export const generateScheme = (type: string): MyObj => {
       break;
     case 'complementary':
       {
-        const colors = [
+        newColors = [
           generateBackgroundColor(baseColor),
-          baseColor,
-          ajustHue(baseColor, 30).hex(),
           textColor(baseColor),
-          ajustHue(baseColor, 50).hex(),
+          baseColor,
+          ajustHue(baseColor, 180, 'plus').hex(),
+          ajustHue(baseColor, 140, 'plus').hex(),
         ];
 
-        newColors = colors;
+        keys.forEach((key, idx) => {
+          obj[key] = newColors[idx];
+        });
       }
       break;
 
     case 'analogous':
       newColors = [
+        generateBackgroundColor(baseColor),
+        textColor(baseColor),
         baseColor,
-        chroma(baseColor)
-          .set('hsl.h', (chroma(baseColor).get('hsl.h') + 30) % 360)
-          .hex(),
-        chroma(baseColor)
-          .set('hsl.h', (chroma(baseColor).get('hsl.h') - 30 + 360) % 360)
-          .hex(),
+        ajustHue(baseColor, 30, 'plus').hex(),
+        ajustHue(baseColor, 30, 'minus').hex(),
       ];
+      keys.forEach((key, idx) => {
+        obj[key] = newColors[idx];
+      });
       break;
 
     default:
       break;
   }
 
-  return obj as MyObj;
+  return obj as ColorsObj;
 };
 
 export const applyColorsToRoot = (colors: Record<string, string>) => {

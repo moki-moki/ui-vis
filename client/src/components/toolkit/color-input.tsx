@@ -4,7 +4,7 @@ import { Input } from '../ui/input';
 
 interface Props {
   color: string;
-  type: 'primary' | 'secondary' | 'accent' | 'text';
+  type: 'primary' | 'secondary' | 'accent' | 'text' | 'background';
   changeColorHandler: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 

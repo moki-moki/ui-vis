@@ -7,9 +7,10 @@ import Button from '../ui/button';
 
 interface Props {
   generateColors: (type: ColorType) => void;
+  selected: string;
 }
 
-const Dice = ({ generateColors }: Props) => {
+const Dice = ({ selected, generateColors }: Props) => {
   const [colorMenu, setColorMenu] = useState<boolean>(false);
 
   const menuToggler = () => setColorMenu((prev) => !prev);
@@ -34,13 +35,25 @@ const Dice = ({ generateColors }: Props) => {
 
       {colorMenu && (
         <ul className="absolute text-text-color flex flex-col gap-2 p-1 uppercase font-bold -top-2 rounded-xl border border-secondary-main -translate-y-full translate-x-1/2  bg-slate-500/30">
-          <li className="hover:bg-accent-color rounded-xl px-1">
-            <Button className="w-full text-start" type="button">
+          <li
+            className={`hover:bg-accent-color rounded-xl px-1 ${selected == 'all' ? 'bg-accent-color' : ''}`}
+          >
+            <Button
+              className="w-full text-start"
+              type="button"
+              onClick={() => generateColors('all')}
+            >
               All
             </Button>
           </li>
-          <li className="hover:bg-accent-color rounded-xl px-1">
-            <Button className="w-full text-start" type="button">
+          <li
+            className={`hover:bg-accent-color rounded-xl px-1 ${selected == 'analogous' ? 'bg-accent-color' : ''}`}
+          >
+            <Button
+              className="w-full text-start"
+              type="button"
+              onClick={() => generateColors('analogous')}
+            >
               Analogous
             </Button>
           </li>

@@ -3,15 +3,23 @@ import { ChangeEvent, useState } from 'react';
 import ColorInput from './color-input';
 import Dice from './dice';
 import { DEFAULT_COLORS } from '../../data/colors';
+import { useKeyBind } from '../../hooks/useKeybind';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useMutateColors } from '../../hooks/useMutateColors';
 import { applyColorsToRoot, generateScheme } from '../../utils/colors';
 
-export type ColorType = 'monochromatic' | 'complementary' | 'analogous' | 'all';
+export type ColorType =
+  | 'monochromatic'
+  | 'complementary'
+  | 'analogous'
+  | 'all'
+  | 'split complementary'
+  | 'triadic'
+  | 'tetradic';
 
 const Toolkit = () => {
   const [colors, setColors] = useLocalStorage('colors', DEFAULT_COLORS);
-  const [selected, setSelected] = useState('all');
+  const [selected, setSelected] = useState<ColorType>('monochromatic');
 
   useMutateColors(colors);
 
@@ -27,6 +35,8 @@ const Toolkit = () => {
     setColors(colorScheme);
     applyColorsToRoot(colorScheme);
   };
+
+  useKeyBind('Space', () => generateColors(selected));
 
   return (
     <div className="bg-slate-500/30 backdrop-blur-lg p-5 flex justify-evenly items-center max-w-4xl m-auto absolute bottom-2 left-0 right-0 rounded-xl">

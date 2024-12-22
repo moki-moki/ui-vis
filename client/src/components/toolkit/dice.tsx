@@ -6,8 +6,8 @@ import { ColorType } from './toolkit';
 import Button from '../ui/button';
 
 interface Props {
+  selected: ColorType;
   generateColors: (type: ColorType) => void;
-  selected: string;
 }
 
 const Dice = ({ selected, generateColors }: Props) => {
@@ -21,6 +21,7 @@ const Dice = ({ selected, generateColors }: Props) => {
         <Button
           type="button"
           className="h-12 bg-secondary-main px-4 py-2 text-accent-color border-r-2 border-border-color hover:bg-accent-color hover:text-text-color"
+          onClick={() => generateColors(selected)}
         >
           <Dice5 size={25} />
         </Button>

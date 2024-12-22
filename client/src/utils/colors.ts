@@ -16,6 +16,15 @@ const ajustHue = (
       : chroma(baseColor).get('hsl.h') + precent) % 360,
   );
 
+const getRandomTypeColor = (): string => {
+  // TODO: put these arrays somewhere else
+  const types = ['monochromatic', 'complementary', 'analogous'];
+
+  const random = Math.floor(Math.random() * types.length);
+
+  return types[random];
+};
+
 const generateBackgroundColor = (baseColor: string) =>
   chroma.mix(baseColor, 'white', 0.9).hex();
 
@@ -23,6 +32,8 @@ const textColor = (baseColor: string) =>
   chroma.mix(baseColor, 'black', 0.9).hex();
 
 export const generateScheme = (type: string): ColorsObj => {
+  type === 'all' ? (type = getRandomTypeColor()) : null;
+
   const baseColor = chroma.random().hex();
 
   const obj: Partial<ColorsObj> = {};

@@ -2,12 +2,12 @@ import { useState } from 'react';
 
 import { ArrowUp, Dice5 } from 'lucide-react';
 
-import { ColorType } from './toolkit';
+import { ColorTypes } from '../../types/colors';
 import Button from '../ui/button';
 
 interface Props {
-  selected: ColorType;
-  generateColors: (type: ColorType) => void;
+  selected: ColorTypes;
+  generateColors: (type: ColorTypes) => void;
 }
 
 const Dice = ({ selected, generateColors }: Props) => {
@@ -58,7 +58,9 @@ const Dice = ({ selected, generateColors }: Props) => {
               Analogous
             </Button>
           </li>
-          <li className="hover:bg-accent-color rounded-xl px-1">
+          <li
+            className={`hover:bg-accent-color rounded-xl px-1 ${selected == 'monochromatic' ? 'bg-accent-color' : ''}`}
+          >
             <Button
               className="w-full text-start"
               type="button"
@@ -67,28 +69,15 @@ const Dice = ({ selected, generateColors }: Props) => {
               Monochromatic
             </Button>
           </li>
-          <li className="hover:bg-accent-color rounded-xl px-1">
+          <li
+            className={`hover:bg-accent-color rounded-xl px-1 ${selected == 'complementary' ? 'bg-accent-color' : ''}`}
+          >
             <Button
               className="w-full text-start"
               type="button"
               onClick={() => generateColors('complementary')}
             >
               Complementary
-            </Button>
-          </li>
-          <li className="hover:bg-accent-color rounded-xl px-1 text-nowrap">
-            <Button className="w-full text-start" type="button">
-              Split Complementary
-            </Button>
-          </li>
-          <li className="hover:bg-accent-color rounded-xl px-1">
-            <Button className="w-full text-start" type="button">
-              Triadic
-            </Button>
-          </li>
-          <li className="hover:bg-accent-color rounded-xl px-1">
-            <Button className="w-full text-start" type="button">
-              Tetradic
             </Button>
           </li>
         </ul>

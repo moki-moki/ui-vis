@@ -3,23 +3,15 @@ import { ChangeEvent, useState } from 'react';
 import ColorInput from './color-input';
 import Dice from './dice';
 import { DEFAULT_COLORS } from '../../data/colors';
-import { useKeyBind } from '../../hooks/useKeybind';
+import { useKeyBind } from '../../hooks/useKeyBind';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { useMutateColors } from '../../hooks/useMutateColors';
+import { ColorTypes } from '../../types/colors';
 import { applyColorsToRoot, generateScheme } from '../../utils/colors';
-
-export type ColorType =
-  | 'monochromatic'
-  | 'complementary'
-  | 'analogous'
-  | 'all'
-  | 'split complementary'
-  | 'triadic'
-  | 'tetradic';
 
 const Toolkit = () => {
   const [colors, setColors] = useLocalStorage('colors', DEFAULT_COLORS);
-  const [selected, setSelected] = useState<ColorType>('monochromatic');
+  const [selected, setSelected] = useState<ColorTypes>('all');
 
   useMutateColors(colors);
 
@@ -28,7 +20,7 @@ const Toolkit = () => {
     document.body.style.setProperty(`--${e.target.name}-color`, e.target.value);
   };
 
-  const generateColors = (type: ColorType) => {
+  const generateColors = (type: ColorTypes) => {
     const colorScheme = generateScheme(type);
 
     setSelected(type);

@@ -4,3 +4,12 @@ export interface ColorsI {
   text: string;
   accent: string;
 }
+
+export type ColorTypes =
+  | 'monochromatic'
+  | 'complementary'
+  | 'analogous'
+  | 'all'
+  | 'split complementary'
+  | 'triadic'
+  | 'tetradic';

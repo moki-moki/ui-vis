@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { ArrowUp, Dice5 } from 'lucide-react';
 
-import { ColorTypes } from '../../types/colors';
+import { ColorTypes } from '@/types/colors';
 import Button from '../ui/button';
 
 interface Props {

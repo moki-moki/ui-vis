@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ArrowUp, Dice5 } from 'lucide-react';
 
 import { ColorTypes } from '@/types/colors';
+
 import Button from '../ui/button';
 
 interface Props {
@@ -78,6 +79,17 @@ const Dice = ({ selected, generateColors }: Props) => {
               onClick={() => generateColors('complementary')}
             >
               Complementary
+            </Button>
+          </li>
+          <li
+            className={`hover:bg-accent-color rounded-xl px-1 ${selected == 'triadic' ? 'bg-accent-color' : ''}`}
+          >
+            <Button
+              className="w-full text-start"
+              type="button"
+              onClick={() => generateColors('triadic')}
+            >
+              Triadic
             </Button>
           </li>
         </ul>

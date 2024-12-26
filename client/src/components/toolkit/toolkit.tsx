@@ -1,13 +1,14 @@
 import { ChangeEvent, useState } from 'react';
 
-import ColorInput from './color-input';
-import Dice from './dice';
 import { DEFAULT_COLORS } from '@/data/colors';
 import { useKeyBind } from '@/hooks/useKeyBind';
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { useMutateColors } from '@/hooks/useMutateColors';
 import { ColorTypes } from '@/types/colors';
 import { applyColorsToRoot, generateScheme } from '@/utils/colors';
+
+import ColorInput from './color-input';
+import Dice from './dice';
 
 const Toolkit = () => {
   const [colors, setColors] = useLocalStorage('colors', DEFAULT_COLORS);

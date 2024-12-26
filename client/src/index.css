@@ -8,6 +8,7 @@
   --secondary-color: #080808;
   --text-color: #666666;
   --accent-color: #fffcfac0;
+  --secondary-faded-color: #08080849;
 }
 
 html,
@@ -18,4 +19,11 @@ body {
 
 * {
   font-family: 'Montserrat', sans-serif;
+}
+
+.stroke-font {
+  font-style: italic;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: var(--text-color);
+  color: transparent;
 }

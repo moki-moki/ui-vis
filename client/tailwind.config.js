@@ -19,6 +19,7 @@ export default {
         'secondary-color': 'var(--secondary-color)',
         'accent-color': 'var(--accent-color)',
         'text-color': 'var(--text-color)',
+        'secondary-faded-color': 'var(--secondary-faded-color)',
       },
     },
     fontFamily: {

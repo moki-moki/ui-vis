@@ -2,7 +2,14 @@ import chroma from 'chroma-js';
 
 type ColorsObj = Record<(typeof keys)[number], string>;
 
-const keys = ['background', 'text', 'primary', 'secondary', 'accent'] as const;
+const keys = [
+  'background',
+  'text',
+  'primary',
+  'secondary',
+  'accent',
+  'secondary-faded',
+] as const;
 
 const ajustHue = (
   baseColor: string,
@@ -18,18 +25,18 @@ const ajustHue = (
 
 const getRandomTypeColor = (): string => {
   // TODO: put these arrays somewhere else
-  const types = ['monochromatic', 'complementary', 'analogous'];
+  const types = ['monochromatic', 'complementary', 'analogous', 'triadic'];
 
   const random = Math.floor(Math.random() * types.length);
 
   return types[random];
 };
 
-const generateBackgroundColor = (baseColor: string) =>
-  chroma.mix(baseColor, 'white', 0.9).hex();
+const mixColor = (baseColor: string, mixColor: 'white' | 'black') =>
+  chroma.mix(baseColor, mixColor, 0.9).hex();
 
-const textColor = (baseColor: string) =>
-  chroma.mix(baseColor, 'black', 0.9).hex();
+const generateOpacityColor = (baseColor: string, opacityValue: number) =>
+  chroma(baseColor).alpha(opacityValue);
 
 export const generateScheme = (type: string): ColorsObj => {
   type === 'all' ? (type = getRandomTypeColor()) : null;
@@ -45,12 +52,19 @@ export const generateScheme = (type: string): ColorsObj => {
       {
         const colors = chroma
           .scale([
-            generateBackgroundColor(baseColor),
+            mixColor(baseColor, 'white'),
             baseColor,
-            textColor(baseColor),
+            mixColor(baseColor, 'black'),
           ])
           .colors(11);
-        newColors = [colors[0], colors[10], colors[4], colors[2], colors[6]];
+        newColors = [
+          colors[0],
+          colors[10],
+          colors[4],
+          colors[2],
+          colors[6],
+          generateOpacityColor(colors[4], 0.3).hex(),
+        ];
 
         keys.forEach((key, idx) => {
           obj[key] = newColors[idx];
@@ -60,11 +74,15 @@ export const generateScheme = (type: string): ColorsObj => {
     case 'complementary':
       {
         newColors = [
-          generateBackgroundColor(baseColor),
-          textColor(baseColor),
+          mixColor(baseColor, 'white'),
+          mixColor(baseColor, 'black'),
           baseColor,
           ajustHue(baseColor, 180, 'plus').hex(),
           ajustHue(baseColor, 140, 'plus').hex(),
+          generateOpacityColor(
+            ajustHue(baseColor, 180, 'plus').hex(),
+            0.3,
+          ).hex(),
         ];
 
         keys.forEach((key, idx) => {
@@ -75,15 +93,36 @@ export const generateScheme = (type: string): ColorsObj => {
 
     case 'analogous':
       newColors = [
-        generateBackgroundColor(baseColor),
-        textColor(baseColor),
+        mixColor(baseColor, 'white'),
+        mixColor(baseColor, 'black'),
         baseColor,
         ajustHue(baseColor, 30, 'plus').hex(),
         ajustHue(baseColor, 30, 'minus').hex(),
+        generateOpacityColor(ajustHue(baseColor, 30, 'plus').hex(), 0.3).hex(),
       ];
       keys.forEach((key, idx) => {
         obj[key] = newColors[idx];
       });
+      break;
+
+    case 'triadic':
+      {
+        newColors = [
+          mixColor(baseColor, 'white'),
+          mixColor(baseColor, 'black'),
+          baseColor,
+          ajustHue(baseColor, 120, 'plus').hex(),
+          ajustHue(baseColor, 240, 'plus').hex(),
+          generateOpacityColor(
+            ajustHue(baseColor, 120, 'plus').hex(),
+            0.3,
+          ).hex(),
+        ];
+      }
+      keys.forEach((key, idx) => {
+        obj[key] = newColors[idx];
+      });
+
       break;
 
     default:

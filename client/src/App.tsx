@@ -1,9 +1,12 @@
+import Home from '@/pages/home/Home';
+
 import Toolkit from './components/toolkit/toolkit';
 
 function App() {
   return (
-    <div className="bg-primary-color text-center">
+    <div className="bg-background-color text-center">
       <Toolkit />
+      <Home />
     </div>
   );
 }

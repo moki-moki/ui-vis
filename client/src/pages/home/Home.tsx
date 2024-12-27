@@ -43,6 +43,35 @@ const Home = () => {
           />
         </div>
       </SectionWrapper>
+      <SectionWrapper>
+        <div className="bg-secondary-faded-color flex p-4 rounded-xl">
+          <div className="text-start w-1/2">
+            <h3 className="text-4xl font-bold">Why use this?</h3>
+            <h4 className="text-2xl">Personalie your color pallet and UI</h4>
+          </div>
+          <div className="flex flex-wrap gap-2 w-full text-start font-bold">
+            <p className="before:content-['1.'] before:mr-2 before:text-accent-color before:text-2xl flex-grow w-1/3">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Ipsum,Lorem ipsum dolor sit amet. beatae.
+            </p>
+            <p className="before:content-['2.'] before:mr-2 before:text-accent-color before:text-2xl flex-grow w-1/3">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+              beatae. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Delectus eum odit aspernatur.
+            </p>
+            <p className="before:content-['3.'] before:mr-2 before:text-accent-color before:text-2xl flex-grow w-1/3">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+              beatae.
+            </p>
+            <p className="before:content-['4.'] before:mr-2 before:text-accent-color before:text-2xl flex-grow w-1/3">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
+              beatae. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Praesentium nihil excepturi nam mollitia neque, esse recusandae?
+              Beatae eum ab delectus!
+            </p>
+          </div>
+        </div>
+      </SectionWrapper>
     </>
   );
 };

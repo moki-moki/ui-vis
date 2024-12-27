@@ -32,7 +32,7 @@ const Toolkit = () => {
   useKeyBind('Space', () => generateColors(selected));
 
   return (
-    <div className="bg-slate-500/30 backdrop-blur-lg p-5 flex justify-evenly items-center max-w-4xl m-auto absolute bottom-2 left-0 right-0 rounded-xl">
+    <div className="bg-slate-500/30 backdrop-blur-lg p-5 flex justify-evenly items-center max-w-4xl m-auto fixed bottom-2 left-0 right-0 rounded-xl">
       <ColorInput
         type="background"
         color={colors.background}

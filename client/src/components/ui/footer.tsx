@@ -10,6 +10,7 @@ const Footer = () => {
           className="hover:text-accent-color"
           target="_blank"
           href="https://github.com/moki-moki/ui-vis"
+          rel="noreferrer"
         >
           <Github />
         </a>

@@ -1,7 +1,7 @@
+import Footer from '@/components/ui/footer';
 import Home from '@/pages/home/Home';
 
 import Toolkit from './components/toolkit/toolkit';
-import Footer from '@/components/ui/footer';
 
 function App() {
   return (

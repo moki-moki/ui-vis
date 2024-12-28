@@ -3,7 +3,6 @@
   "compilerOptions": {
     "target": "ESNext",
     "composite": true,
-    "emitDeclarationOnly": true,
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
@@ -17,7 +16,7 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
+    "emitDeclarationOnly": true,
     "noImplicitAny": true, // required option
     "noImplicitThis": true, // required option
     "jsx": "react-jsx",

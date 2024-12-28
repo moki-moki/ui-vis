@@ -36,7 +36,7 @@ const Dice = ({ selected, generateColors }: Props) => {
       </div>
 
       {colorMenu && (
-        <ul className="absolute text-text-color flex flex-col gap-2 p-1 uppercase font-bold -top-2 rounded-xl border border-secondary-main -translate-y-full translate-x-1/2  bg-slate-500/30">
+        <ul className="absolute text-text-color flex flex-col gap-2 p-1 uppercase font-bold -top-2 rounded-xl border border-secondary-main -translate-y-full translate-x-1/2 backdrop-blur-lg bg-slate-500/30">
           <li
             className={`hover:bg-accent-color rounded-xl px-1 ${selected == 'all' ? 'bg-accent-color' : ''}`}
           >

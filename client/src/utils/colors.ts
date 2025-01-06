@@ -62,7 +62,7 @@ export const generateScheme = (type: string): ColorsObj => {
           colors[10],
           colors[4],
           colors[2],
-          colors[6],
+          colors[7],
           generateOpacityColor(colors[4], 0.3).hex(),
         ];
 

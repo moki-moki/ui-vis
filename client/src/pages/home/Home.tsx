@@ -1,9 +1,14 @@
 import { CheckCircle, PuzzleIcon, TimerIcon } from 'lucide-react';
 
+import ComponentRender from '@/components/component-render';
+import DropZone from '@/components/drop-zone';
 import Card from '@/components/ui/card';
 import SectionWrapper from '@/components/ui/section-wrapper';
+import { useSidebarContext } from '@/context/sidebar-context';
 
 const Home = () => {
+  const { handleDrop, handleDragOver } = useSidebarContext();
+
   return (
     <>
       <SectionWrapper>
@@ -72,6 +77,10 @@ const Home = () => {
           </div>
         </div>
       </SectionWrapper>
+      <ComponentRender />
+      <DropZone onDrop={handleDrop} onDragOver={handleDragOver}>
+        <h4>Drop Here</h4>
+      </DropZone>
     </>
   );
 };

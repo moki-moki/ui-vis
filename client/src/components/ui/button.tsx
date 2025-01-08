@@ -1,10 +1,13 @@
 import { ComponentProps, PropsWithChildren } from 'react';
 
-type Props = PropsWithChildren<ComponentProps<'button'>>;
+interface Props extends PropsWithChildren<ComponentProps<'button'>> {
+  label?: string;
+}
 
-const Button = ({ children, className, ...props }: Props) => {
+const Button = ({ children, label, className, ...props }: Props) => {
   return (
     <button className={className} {...props}>
+      {label}
       {children}
     </button>
   );

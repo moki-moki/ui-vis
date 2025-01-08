@@ -1,19 +1,22 @@
-import { ComponentI } from '@/types/component';
+import { ComponentI, ComponentPropsI } from '@/types/component';
 
 interface Props {
   component: ComponentI;
-  handleDragStart: (e: React.DragEvent, id: string) => void;
+  handleDragStart: (
+    e: React.DragEvent,
+    name: string,
+    props: ComponentPropsI,
+  ) => void;
 }
 
 const SidebarComponent = ({ component, handleDragStart }: Props) => {
-  // TODO: Add props to ui components
-  const { name, icon } = component;
+  const { name, icon, props } = component;
 
   return (
     <div
       className="border border-secondary-color rounded-xl my-3 p-5 cursor-grab flex flex-col"
       draggable={true}
-      onDragStart={(e) => handleDragStart(e, name)}
+      onDragStart={(e) => handleDragStart(e, name, props)}
     >
       <div className="m-auto text-accent-color">{icon}</div>
       <span className="text-text-color">{name}</span>

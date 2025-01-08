@@ -11,11 +11,17 @@ const DEFAULT_COMPONENTS = [
     id: '1',
     name: 'button',
     icon: <CreditCard />,
+    props: {
+      label: 'Placeholder text',
+    },
   },
   {
     id: '2',
     name: 'input',
     icon: <Component />,
+    props: {
+      label: 'Placeholder text',
+    },
   },
 ];
 

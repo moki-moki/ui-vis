@@ -4,8 +4,8 @@ import Button from '@/components/ui/button';
 import SectionWrapper from '@/components/ui/section-wrapper';
 import { useSidebarContext } from '@/context/sidebar-context';
 
-const ComponentMap: Record<string, ElementType> = {
-  button: () => <Button>Button</Button>,
+const COMPONENT_MAP: Record<string, ElementType> = {
+  button: ({ label, props }) => <Button label={label} {...props} />,
 };
 
 const ComponentRender = () => {
@@ -14,11 +14,11 @@ const ComponentRender = () => {
   return (
     <>
       {droppedComponents.map((el) => {
-        const Component = ComponentMap[el.id];
+        const Component = COMPONENT_MAP[el.id];
 
         return (
           <SectionWrapper key={el.id}>
-            <Component />
+            <Component props={el.props} />
           </SectionWrapper>
         );
       })}

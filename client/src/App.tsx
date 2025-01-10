@@ -1,5 +1,6 @@
 import Sidebar from '@/components/sidebar/Sidebar';
 import Footer from '@/components/ui/footer';
+import { ContextMenuProvider } from '@/context/context-menu';
 import { SidebarContextProvider } from '@/context/sidebar-context';
 import Home from '@/pages/home/Home';
 
@@ -11,7 +12,9 @@ function App() {
       <Sidebar />
       <Toolkit />
       <SidebarContextProvider>
-        <Home />
+        <ContextMenuProvider>
+          <Home />
+        </ContextMenuProvider>
       </SidebarContextProvider>
       <Footer />
     </div>

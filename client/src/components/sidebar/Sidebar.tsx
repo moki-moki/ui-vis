@@ -46,7 +46,11 @@ const Sidebar = () => {
           ))}
         </div>
       )}
-      <Button type="button" className="m-2 p-2" onClick={toggleMenu}>
+      <Button
+        type="button"
+        className="m-2 border-none text-accent-color p-2"
+        onClick={toggleMenu}
+      >
         <SidebarIcon />
       </Button>
     </div>

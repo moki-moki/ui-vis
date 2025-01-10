@@ -1,8 +1,11 @@
-import { ElementType } from 'react';
+import { ElementType, useRef } from 'react';
 
+import ContextMenu from '@/components/context-menu';
 import Button from '@/components/ui/button';
 import SectionWrapper from '@/components/ui/section-wrapper';
+import { useContextMenu } from '@/context/context-menu';
 import { useSidebarContext } from '@/context/sidebar-context';
+import { useClickOutside } from '@/hooks/useClickOutside';
 
 const COMPONENT_MAP: Record<string, ElementType> = {
   button: ({ label, variant, props }) => (
@@ -11,7 +14,11 @@ const COMPONENT_MAP: Record<string, ElementType> = {
 };
 
 const ComponentRender = () => {
+  const ref = useRef(null);
   const { droppedComponents } = useSidebarContext();
+  const { contextMenu, handleContextMenu, onClose } = useContextMenu();
+
+  useClickOutside(ref, onClose);
 
   return (
     <>
@@ -20,10 +27,14 @@ const ComponentRender = () => {
 
         return (
           <SectionWrapper key={el.id}>
-            <Component props={el.props} variant={el.props.variant} />
+            <span ref={ref} onContextMenu={handleContextMenu}>
+              <Component props={el.props} variant={el.props.variant} />
+            </span>
           </SectionWrapper>
         );
       })}
+
+      {contextMenu.isVisible && <ContextMenu />}
     </>
   );
 };

@@ -18,7 +18,9 @@ const ColorInput = ({ color, type, changeColorHandler }: Props) => {
         htmlFor={type}
         className={`block w-24 h-10 rounded-xl cursor-pointer`}
         style={{ backgroundColor: color }}
-      ></label>
+      >
+        &nbsp;
+      </label>
       <Input
         onChange={changeColorHandler}
         name={type}

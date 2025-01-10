@@ -5,7 +5,9 @@ import SectionWrapper from '@/components/ui/section-wrapper';
 import { useSidebarContext } from '@/context/sidebar-context';
 
 const COMPONENT_MAP: Record<string, ElementType> = {
-  button: ({ label, props }) => <Button label={label} {...props} />,
+  button: ({ label, variant, props }) => (
+    <Button label={label} variants={variant} {...props} />
+  ),
 };
 
 const ComponentRender = () => {
@@ -18,7 +20,7 @@ const ComponentRender = () => {
 
         return (
           <SectionWrapper key={el.id}>
-            <Component props={el.props} />
+            <Component props={el.props} variant={el.props.variant} />
           </SectionWrapper>
         );
       })}

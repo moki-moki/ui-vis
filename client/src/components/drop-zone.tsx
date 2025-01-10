@@ -12,7 +12,7 @@ const DropZone = ({ children, onDrop, onDragOver }: Props) => {
   return (
     <SectionWrapper>
       <div
-        className="p-5 border border-background-color hover:border-dotted hover:border-accent-color"
+        className="p-5 border border-dotted border-accent-color rounded-sm"
         onDrop={onDrop}
         onDragOver={onDragOver}
       >

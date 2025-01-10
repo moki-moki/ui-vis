@@ -13,6 +13,7 @@ const DEFAULT_COMPONENTS = [
     icon: <CreditCard />,
     props: {
       label: 'Placeholder text',
+      variant: 'default',
     },
   },
   {
@@ -45,11 +46,7 @@ const Sidebar = () => {
           ))}
         </div>
       )}
-      <Button
-        type="button"
-        className="text-accent-color p-2"
-        onClick={toggleMenu}
-      >
+      <Button type="button" className="m-2 p-2" onClick={toggleMenu}>
         <SidebarIcon />
       </Button>
     </div>

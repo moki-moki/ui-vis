@@ -24,6 +24,7 @@ export const ContextMenuProvider = ({ children }: { children: ReactNode }) => {
   ) => {
     e.stopPropagation();
     e.preventDefault();
+
     const { pageX, pageY } = e;
 
     setContextMenu({ isVisible: true, x: pageX, y: pageY });

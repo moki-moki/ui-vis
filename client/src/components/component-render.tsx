@@ -1,11 +1,14 @@
-import { ElementType, useRef } from 'react';
+import { ElementType } from 'react';
+
+import { createPortal } from 'react-dom';
 
 import ContextMenu from '@/components/context-menu';
+import ModalRender from '@/components/popups/ModalRender';
 import Button from '@/components/ui/button';
 import SectionWrapper from '@/components/ui/section-wrapper';
 import { useContextMenu } from '@/context/context-menu';
+import { useModal } from '@/context/modal-context';
 import { useSidebarContext } from '@/context/sidebar-context';
-import { useClickOutside } from '@/hooks/useClickOutside';
 
 const COMPONENT_MAP: Record<string, ElementType> = {
   button: ({ label, variant, props }) => (
@@ -14,22 +17,31 @@ const COMPONENT_MAP: Record<string, ElementType> = {
 };
 
 const ComponentRender = () => {
-  const ref = useRef(null);
   const { droppedComponents } = useSidebarContext();
-  const { contextMenu, handleContextMenu, onClose } = useContextMenu();
-
-  useClickOutside(ref, onClose);
+  const { contextMenu, handleContextMenu } = useContextMenu();
+  const { isOpen } = useModal();
 
   return (
     <>
       {droppedComponents.map((el) => {
-        const Component = COMPONENT_MAP[el.id];
+        const Component = COMPONENT_MAP[el.componentName];
 
         return (
           <SectionWrapper key={el.id}>
-            <span ref={ref} onContextMenu={handleContextMenu}>
-              <Component props={el.props} variant={el.props.variant} />
-            </span>
+            <>
+              <span onContextMenu={handleContextMenu}>
+                <Component props={el.props} variant={el.props.variant} />
+              </span>
+              {isOpen &&
+                createPortal(
+                  <ModalRender
+                    label={el.props.label}
+                    id={el.id}
+                    type={el.componentName}
+                  />,
+                  document.body,
+                )}
+            </>
           </SectionWrapper>
         );
       })}

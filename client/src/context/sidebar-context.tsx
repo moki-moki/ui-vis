@@ -12,12 +12,15 @@ const DEFAULT_VALUES: SidebarContextI = {
   handleDragOver: (_e: React.DragEvent) => {},
   handleDragStart: (
     e: React.DragEvent,
+    id: string,
     name: string,
     props: ComponentPropsI,
   ) => {
-    e.dataTransfer.setData('component', name);
+    e.dataTransfer.setData('id', id);
+    e.dataTransfer.setData('name', name);
     e.dataTransfer.setData('componentProps', JSON.stringify(props));
   },
+  handleUpdateComponent: (_id: string) => {},
 };
 
 const SidebarContext = createContext(DEFAULT_VALUES);
@@ -33,12 +36,13 @@ export const SidebarContextProvider = ({
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
-    const data = e.dataTransfer.getData('component');
+    const id = e.dataTransfer.getData('id');
+    const name = e.dataTransfer.getData('name');
     const componentProps = JSON.parse(e.dataTransfer.getData('componentProps'));
 
     setDroppedComponents((prev) => [
       ...prev,
-      { id: data, props: componentProps },
+      { id, componentName: name, props: componentProps },
     ]);
   };
 
@@ -48,16 +52,34 @@ export const SidebarContextProvider = ({
 
   const handleDragStart = (
     e: React.DragEvent,
+    id: string,
     name: string,
     props: ComponentPropsI,
   ) => {
-    e.dataTransfer.setData('component', name);
+    e.dataTransfer.setData('id', id);
+    e.dataTransfer.setData('name', name);
     e.dataTransfer.setData('componentProps', JSON.stringify(props));
+  };
+
+  const handleUpdateComponent = (id: string, key: string, newValue: string) => {
+    setDroppedComponents((prevData) =>
+      prevData.map((item) =>
+        item.id === id
+          ? { ...item, props: { ...item.props, [key]: newValue } }
+          : item,
+      ),
+    );
   };
 
   return (
     <SidebarContext.Provider
-      value={{ handleDrop, handleDragOver, handleDragStart, droppedComponents }}
+      value={{
+        handleDrop,
+        handleDragOver,
+        handleDragStart,
+        handleUpdateComponent,
+        droppedComponents,
+      }}
     >
       {children}
     </SidebarContext.Provider>

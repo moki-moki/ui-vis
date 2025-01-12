@@ -8,7 +8,7 @@ export interface ComponentI {
 }
 
 export interface DroppedComponentI extends ComponentPropsI {
-  id: string;
+  componentName: string;
 }
 
 export interface SidebarContextI {
@@ -17,9 +17,17 @@ export interface SidebarContextI {
   handleDragOver: (_e: React.DragEvent) => void;
   handleDragStart: (
     e: React.DragEvent,
+    id: string,
     name: string,
     props: ComponentPropsI,
   ) => void;
+  handleUpdateComponent: (id: string, key: string, newValue: string) => void;
+}
+
+export interface DragStartI {
+  e: React.DragEvent;
+  name: string;
+  props: ComponentPropsI;
 }
 
 export interface ComponentPropsI {

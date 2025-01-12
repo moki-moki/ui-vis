@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
 import { Component, CreditCard, SidebarIcon } from 'lucide-react';
+import { v4 as uuidv4 } from 'uuid';
+
 
 import SidebarComponent from '@/components/sidebar/SidebarComponent';
 import Button from '@/components/ui/button';
@@ -8,7 +10,7 @@ import { useSidebarContext } from '@/context/sidebar-context';
 
 const DEFAULT_COMPONENTS = [
   {
-    id: '1',
+    id: uuidv4(),
     name: 'button',
     icon: <CreditCard />,
     props: {
@@ -17,7 +19,7 @@ const DEFAULT_COMPONENTS = [
     },
   },
   {
-    id: '2',
+    id: uuidv4(),
     name: 'input',
     icon: <Component />,
     props: {

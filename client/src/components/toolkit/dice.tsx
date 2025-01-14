@@ -18,17 +18,17 @@ const Dice = ({ selected, generateColors }: Props) => {
 
   return (
     <div className="relative">
-      <div className="flex justify-between border-border-color border-2 rounded-xl overflow-hidden">
+      <div className="flex justify-between border-accent-color border-2 rounded-xl overflow-hidden">
         <Button
           type="button"
-          className="h-12 bg-secondary-main px-4 py-2 text-accent-color border-r-2 border-border-color hover:bg-accent-color hover:text-text-color"
+          className="border-none rounded-none h-12 bg-secondary-main px-4 py-2 text-accent-color hover:bg-accent-color hover:text-text-color"
           onClick={() => generateColors(selected)}
         >
           <Dice5 size={25} />
         </Button>
         <Button
           type="button"
-          className="p-2 text-accent-color bg-secondary-main"
+          className="border-r-0 border-t-0 border-b-0 border-l-2 rounded-none border-accent-color p-2 text-accent-color bg-secondary-main"
           onClick={menuToggler}
         >
           <ArrowUp size={20} />

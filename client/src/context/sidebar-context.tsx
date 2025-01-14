@@ -8,6 +8,7 @@ import {
 
 const DEFAULT_VALUES: SidebarContextI = {
   droppedComponents: [],
+  editingItem: {},
   handleDrop: (_e: React.DragEvent) => {},
   handleDragOver: (_e: React.DragEvent) => {},
   handleDragStart: (
@@ -21,6 +22,7 @@ const DEFAULT_VALUES: SidebarContextI = {
     e.dataTransfer.setData('componentProps', JSON.stringify(props));
   },
   handleUpdateComponent: (_id: string) => {},
+  getItemData: (_id: string) => {},
 };
 
 const SidebarContext = createContext(DEFAULT_VALUES);
@@ -33,6 +35,7 @@ export const SidebarContextProvider = ({
   const [droppedComponents, setDroppedComponents] = useState<
     DroppedComponentI[]
   >([]);
+  const [editingItem, setEditingItem] = useState({});
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -71,14 +74,22 @@ export const SidebarContextProvider = ({
     );
   };
 
+  const getItemData = (id: string) => {
+    const component = droppedComponents.find((el) => el.id === id);
+
+    if (component) setEditingItem(component);
+  };
+
   return (
     <SidebarContext.Provider
       value={{
+        editingItem,
+        droppedComponents,
         handleDrop,
+        getItemData,
         handleDragOver,
         handleDragStart,
         handleUpdateComponent,
-        droppedComponents,
       }}
     >
       {children}

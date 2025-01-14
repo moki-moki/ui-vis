@@ -13,7 +13,7 @@ const InputArea = (
       {error && (
         <span className="text-red-500 uppercase font-bold">{error}</span>
       )}
-      <input className={`border-none ${className}`} {...props} ref={ref} />
+      <input className={`${className}`} {...props} ref={ref} />
     </>
   );
 };

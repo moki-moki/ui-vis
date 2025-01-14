@@ -10,7 +10,7 @@ const DEFAULT_CONTEXT_VALUE = {
   contextMenu: INITIAL_CONTEXT_MENU,
   onClose: () => {},
   handleContextMenu: (
-    _e: React.MouseEvent<HTMLDivElement, globalThis.MouseEvent>,
+    _e: React.MouseEvent<HTMLSpanElement, globalThis.MouseEvent>,
   ) => {},
 };
 
@@ -20,7 +20,7 @@ export const ContextMenuProvider = ({ children }: { children: ReactNode }) => {
   const [contextMenu, setContextMenu] = useState(INITIAL_CONTEXT_MENU);
 
   const handleContextMenu = (
-    e: React.MouseEvent<HTMLDivElement, globalThis.MouseEvent>,
+    e: React.MouseEvent<HTMLSpanElement, globalThis.MouseEvent>,
   ) => {
     e.stopPropagation();
     e.preventDefault();

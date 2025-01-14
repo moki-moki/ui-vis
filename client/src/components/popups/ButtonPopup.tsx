@@ -1,31 +1,72 @@
-import Button from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useSidebarContext } from '@/context/sidebar-context';
+import { DroppedComponentI } from '@/types/component';
 
-const ButtonPopup = ({ label, id }: { label: string; id: string }) => {
+const ButtonPopup = ({
+  component,
+  label,
+  id,
+}: {
+  component: DroppedComponentI;
+  label: string;
+  id: string;
+}) => {
   const { handleUpdateComponent } = useSidebarContext();
 
   return (
-    <div className="p-4">
-      <div className="flex items-center my-2">
-        <Button
-          className="rounded-full rounded-r-none border-r-0"
-          onClick={() => handleUpdateComponent(id, 'variant', 'default')}
+    <>
+      <h5 className="text-sm uppercase font-bold mb-2">Button Styles</h5>
+      <div className="flex items-center w-1/2">
+        <label
+          className="relative flex-grow p-1 cursor-pointer "
+          htmlFor="btnStyle"
         >
-          Ghosted
-        </Button>
-        <Button
-          className="rounded-full rounded-l-none"
-          onClick={() => handleUpdateComponent(id, 'variant', 'outlined')}
+          <span className="block relative pointer-events-none z-20 p-2">
+            Outlined
+          </span>
+          <Input
+            onChange={() => handleUpdateComponent(id, 'variant', 'default')}
+            checked={component.props.variant === 'default'}
+            name="btnStyle"
+            value="default"
+            type="radio"
+            className="w-full absolute top-0 left-0 peer h-full cursor-pointer appearance-none rounded-full border border-accent-color rounded-r-none border-r-0 checked:bg-primary-color transition-all"
+          />
+        </label>
+
+        <label
+          className="relative flex-grow p-1 cursor-pointer"
+          htmlFor="solid"
         >
-          Outlined
-        </Button>
+          <span className="block pointer-events-none relative z-20 p-2">
+            Solid
+          </span>
+          <Input
+            onChange={() => handleUpdateComponent(id, 'variant', 'outlined')}
+            checked={component.props.variant === 'outlined'}
+            value="outlined"
+            name="btnStyle"
+            type="radio"
+            className="w-full absolute top-0 left-0 peer h-full cursor-pointer appearance-none rounded-full border border-accent-color rounded-l-none checked:bg-primary-color transition-all"
+          />
+        </label>
       </div>
-      <Input
-        value={label}
-        onChange={(e) => handleUpdateComponent(id, 'label', e.target.value)}
-      />
-    </div>
+      <div className="my-4">
+        <label
+          htmlFor="text"
+          className="block text-sm uppercase font-bold my-2"
+        >
+          Button Text
+        </label>
+        <Input
+          name="text"
+          type="text"
+          value={label}
+          onChange={(e) => handleUpdateComponent(id, 'label', e.target.value)}
+          className="p-2 w-full border-2 outline-none rounded-md border-accent-color"
+        />
+      </div>
+    </>
   );
 };
 

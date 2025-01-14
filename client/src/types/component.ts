@@ -13,6 +13,7 @@ export interface DroppedComponentI extends ComponentPropsI {
 
 export interface SidebarContextI {
   droppedComponents: DroppedComponentI[];
+  editingItem: object;
   handleDrop: (_e: React.DragEvent) => void;
   handleDragOver: (_e: React.DragEvent) => void;
   handleDragStart: (
@@ -22,6 +23,7 @@ export interface SidebarContextI {
     props: ComponentPropsI,
   ) => void;
   handleUpdateComponent: (id: string, key: string, newValue: string) => void;
+  getItemData: (id: string) => void;
 }
 
 export interface DragStartI {

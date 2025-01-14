@@ -29,24 +29,24 @@ const ComponentRender = () => {
         return (
           <SectionWrapper key={el.id}>
             <>
-              <span onContextMenu={handleContextMenu}>
+              <span onContextMenu={(e) => handleContextMenu(e)}>
                 <Component props={el.props} variant={el.props.variant} />
               </span>
               {isOpen &&
                 createPortal(
                   <ModalRender
-                    label={el.props.label}
                     id={el.id}
+                    component={el}
+                    label={el.props.label}
                     type={el.componentName}
                   />,
                   document.body,
                 )}
+              {contextMenu.isVisible && <ContextMenu id={el.id} />}
             </>
           </SectionWrapper>
         );
       })}
-
-      {contextMenu.isVisible && <ContextMenu />}
     </>
   );
 };

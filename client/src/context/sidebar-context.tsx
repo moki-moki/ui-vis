@@ -8,7 +8,7 @@ import {
 
 const DEFAULT_VALUES: SidebarContextI = {
   droppedComponents: [],
-  editingItem: {},
+  editingComponent: {},
   handleDrop: (_e: React.DragEvent) => {},
   handleDragOver: (_e: React.DragEvent) => {},
   handleDragStart: (
@@ -22,7 +22,8 @@ const DEFAULT_VALUES: SidebarContextI = {
     e.dataTransfer.setData('componentProps', JSON.stringify(props));
   },
   handleUpdateComponent: (_id: string) => {},
-  getItemData: (_id: string) => {},
+  handleSubmitChanges: (_id: string) => {},
+  getEditingComponentData: (_id: string) => {},
 };
 
 const SidebarContext = createContext(DEFAULT_VALUES);
@@ -35,7 +36,10 @@ export const SidebarContextProvider = ({
   const [droppedComponents, setDroppedComponents] = useState<
     DroppedComponentI[]
   >([]);
-  const [editingItem, setEditingItem] = useState({});
+
+  const [editingComponent, setEditingComponent] = useState<
+    Omit<DroppedComponentI, 'icon'>
+  >({});
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -65,31 +69,36 @@ export const SidebarContextProvider = ({
   };
 
   const handleUpdateComponent = (id: string, key: string, newValue: string) => {
-    setDroppedComponents((prevData) =>
-      prevData.map((item) =>
-        item.id === id
-          ? { ...item, props: { ...item.props, [key]: newValue } }
-          : item,
-      ),
+    setEditingComponent((prev) =>
+      prev.id === id
+        ? { ...prev, props: { ...prev.props, [key]: newValue } }
+        : prev,
     );
   };
 
-  const getItemData = (id: string) => {
+  const handleSubmitChanges = (id: string) => {
+    setDroppedComponents((prev) =>
+      prev.map((el) => (el.id === id ? { ...el, ...editingComponent } : el)),
+    );
+  };
+
+  const getEditingComponentData = (id: string) => {
     const component = droppedComponents.find((el) => el.id === id);
 
-    if (component) setEditingItem(component);
+    if (component) setEditingComponent(component);
   };
 
   return (
     <SidebarContext.Provider
       value={{
-        editingItem,
         droppedComponents,
+        editingComponent,
         handleDrop,
-        getItemData,
         handleDragOver,
         handleDragStart,
+        handleSubmitChanges,
         handleUpdateComponent,
+        getEditingComponentData,
       }}
     >
       {children}

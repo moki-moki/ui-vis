@@ -1,5 +1,7 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
 
+import { useSidebarContext } from '@/context/sidebar-context';
+
 const INITIAL_CONTEXT_MENU = {
   x: 0,
   y: 0,
@@ -18,21 +20,29 @@ const MenuContext = createContext(DEFAULT_CONTEXT_VALUE);
 
 export const ContextMenuProvider = ({ children }: { children: ReactNode }) => {
   const [contextMenu, setContextMenu] = useState(INITIAL_CONTEXT_MENU);
+  const { getEditingComponentData } = useSidebarContext();
 
   const handleContextMenu = (
     e: React.MouseEvent<HTMLSpanElement, globalThis.MouseEvent>,
   ) => {
     e.stopPropagation();
     e.preventDefault();
-
     const { pageX, pageY } = e;
 
-    setContextMenu({ isVisible: true, x: pageX, y: pageY });
+    const element = e.target as HTMLElement;
+
+    const dataId = element.getAttribute('data-id');
+
+    if (dataId) getEditingComponentData(dataId);
+
+    setContextMenu({
+      isVisible: true,
+      x: pageX,
+      y: pageY,
+    });
   };
 
-  const onClose = () => {
-    setContextMenu(INITIAL_CONTEXT_MENU);
-  };
+  const onClose = () => setContextMenu(INITIAL_CONTEXT_MENU);
 
   return (
     <MenuContext.Provider value={{ contextMenu, onClose, handleContextMenu }}>

@@ -4,22 +4,11 @@ import { SquarePen } from 'lucide-react';
 
 import { useContextMenu } from '@/context/context-menu';
 import { useModal } from '@/context/modal-context';
-import { useSidebarContext } from '@/context/sidebar-context';
 import { useClickOutside } from '@/hooks/useClickOutside';
 
-interface Props {
-  id: string;
-}
-
-const ContextMenu = ({ id }: Props) => {
+const ContextMenu = () => {
   const { contextMenu: menu, onClose } = useContextMenu();
-  const { getItemData } = useSidebarContext();
   const { openModal } = useModal();
-
-  const handleEditItem = (id: string) => {
-    getItemData(id);
-    openModal();
-  };
 
   const ref = useRef(null);
   useClickOutside(ref, onClose);
@@ -33,7 +22,7 @@ const ContextMenu = ({ id }: Props) => {
       <ul className="flex flex-col gap-1">
         <li
           className="flex items-center justify-between cursor-pointer text-xs font-bold uppercase text-text-color"
-          onClick={() => handleEditItem(id)}
+          onClick={openModal}
         >
           Edit
           <span className="mr-2 block text-end">

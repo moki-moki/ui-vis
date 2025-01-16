@@ -3,13 +3,13 @@ import { useSidebarContext } from '@/context/sidebar-context';
 import { DroppedComponentI } from '@/types/component';
 
 const ButtonPopup = ({
+  id,
   component,
   label,
-  id,
 }: {
+  id: string;
   component: DroppedComponentI;
   label: string;
-  id: string;
 }) => {
   const { handleUpdateComponent } = useSidebarContext();
 
@@ -26,7 +26,7 @@ const ButtonPopup = ({
           </span>
           <Input
             onChange={() => handleUpdateComponent(id, 'variant', 'default')}
-            checked={component.props.variant === 'default'}
+            defaultChecked={component.props.variant === 'default'}
             name="btnStyle"
             value="default"
             type="radio"
@@ -43,7 +43,7 @@ const ButtonPopup = ({
           </span>
           <Input
             onChange={() => handleUpdateComponent(id, 'variant', 'outlined')}
-            checked={component.props.variant === 'outlined'}
+            defaultChecked={component.props.variant === 'outlined'}
             value="outlined"
             name="btnStyle"
             type="radio"

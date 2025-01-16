@@ -1,4 +1,4 @@
-import { CheckCircle, PuzzleIcon, TimerIcon } from 'lucide-react';
+import { TimerIcon } from 'lucide-react';
 
 import ComponentRender from '@/components/component-render';
 import DropZone from '@/components/drop-zone';
@@ -32,19 +32,10 @@ const Home = () => {
       <SectionWrapper>
         <div className="flex justify-between items-center gap-5 my-10">
           <Card
+            count={3}
             title="Save Time"
             text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsam consectetur non, blanditiis voluptate odit! Iusto quod quo quae accusamus."
             icon={<TimerIcon size={80} />}
-          />
-          <Card
-            title="Ease of use"
-            text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsam consectetur non, blanditiis voluptate odit! Iusto quod quo quae accusamus."
-            icon={<CheckCircle size={80} />}
-          />
-          <Card
-            title="Extensive"
-            text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsam consectetur non, blanditiis voluptate odit! Iusto quod quo quae accusamus."
-            icon={<PuzzleIcon size={80} />}
           />
         </div>
       </SectionWrapper>

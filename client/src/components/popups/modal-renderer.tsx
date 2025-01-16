@@ -2,25 +2,23 @@ import { ElementType } from 'react';
 
 import { Check, X } from 'lucide-react';
 
-import ButtonPopup from '@/components/popups/ButtonPopup';
+import ButtonPopup from '@/components/popups/button-popup';
+import CardPopup from '@/components/popups/card-popup';
 import Button from '@/components/ui/button';
 import { useModal } from '@/context/modal-context';
-import { DroppedComponentI } from '@/types/component';
+import { useSidebarContext } from '@/context/sidebar-context';
 
 const ModalMap: Record<string, ElementType> = {
   button: ButtonPopup,
+  card: CardPopup,
 };
 
-interface Props {
-  id: string;
-  type: string;
-  label: string;
-  component: DroppedComponentI;
-}
-
-const ModalRender = ({ label, id, type, component }: Props) => {
-  const PopupComponent = ModalMap[type];
+const ModalRender = () => {
   const { closeModal } = useModal();
+
+  const { editingComponent, handleSubmitChanges } = useSidebarContext();
+
+  const PopupComponent = ModalMap[editingComponent.componentName];
 
   return (
     <div className="fixed top-0 left-0 h-screen w-full bg-secondary-faded-color z-10">
@@ -32,12 +30,19 @@ const ModalRender = ({ label, id, type, component }: Props) => {
           >
             <X />
           </Button>
-          <Button className="hover:bg-secondary-color">
+          <Button
+            className="hover:bg-secondary-color"
+            onClick={() => handleSubmitChanges(editingComponent.id)}
+          >
             <Check />
           </Button>
         </div>
         <span className="bg-accent-color block rounded-full my-2 w-full h-0.5"></span>
-        <PopupComponent component={component} id={id} label={label} />
+        <PopupComponent
+          id={editingComponent.id}
+          component={editingComponent}
+          label={editingComponent.props.label}
+        />
       </div>
     </div>
   );

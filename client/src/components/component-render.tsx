@@ -3,17 +3,19 @@ import { ElementType } from 'react';
 import { createPortal } from 'react-dom';
 
 import ContextMenu from '@/components/context-menu';
-import ModalRender from '@/components/popups/ModalRender';
+import ModalRender from '@/components/popups/modal-renderer';
 import Button from '@/components/ui/button';
+import Card from '@/components/ui/card';
 import SectionWrapper from '@/components/ui/section-wrapper';
 import { useContextMenu } from '@/context/context-menu';
 import { useModal } from '@/context/modal-context';
 import { useSidebarContext } from '@/context/sidebar-context';
 
 const COMPONENT_MAP: Record<string, ElementType> = {
-  button: ({ label, variant, props }) => (
-    <Button label={label} variants={variant} {...props} />
+  button: ({ id, label, variant, props }) => (
+    <Button id={id} label={label} variants={variant} {...props} />
   ),
+  card: ({ id, props }) => <Card id={id} {...props} />,
 };
 
 const ComponentRender = () => {
@@ -28,25 +30,18 @@ const ComponentRender = () => {
 
         return (
           <SectionWrapper key={el.id}>
-            <>
-              <span onContextMenu={(e) => handleContextMenu(e)}>
-                <Component props={el.props} variant={el.props.variant} />
-              </span>
-              {isOpen &&
-                createPortal(
-                  <ModalRender
-                    id={el.id}
-                    component={el}
-                    label={el.props.label}
-                    type={el.componentName}
-                  />,
-                  document.body,
-                )}
-              {contextMenu.isVisible && <ContextMenu id={el.id} />}
-            </>
+            <span onContextMenu={(e) => handleContextMenu(e)}>
+              <Component
+                id={el.id}
+                props={el.props}
+                variant={el.props.variant}
+              />
+            </span>
           </SectionWrapper>
         );
       })}
+      {contextMenu.isVisible && <ContextMenu />}
+      {isOpen && createPortal(<ModalRender />, document.body)}
     </>
   );
 };

@@ -1,10 +1,9 @@
 import { useState } from 'react';
 
-import { Component, CreditCard, SidebarIcon } from 'lucide-react';
+import { CreditCard, SidebarIcon } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 
-
-import SidebarComponent from '@/components/sidebar/SidebarComponent';
+import SidebarComponent from '@/components/sidebar/sidebar-components';
 import Button from '@/components/ui/button';
 import { useSidebarContext } from '@/context/sidebar-context';
 
@@ -20,10 +19,11 @@ const DEFAULT_COMPONENTS = [
   },
   {
     id: uuidv4(),
-    name: 'input',
-    icon: <Component />,
+    name: 'card',
+    icon: <CreditCard />,
     props: {
-      label: 'Placeholder text',
+      title: 'Placeholder title',
+      text: 'Placeholder description',
     },
   },
 ];

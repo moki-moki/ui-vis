@@ -28,8 +28,9 @@ export const ContextMenuProvider = ({ children }: { children: ReactNode }) => {
     e.stopPropagation();
     e.preventDefault();
     const { pageX, pageY } = e;
+    e.stopPropagation();
 
-    const element = e.target as HTMLElement;
+    const element = e.currentTarget.firstChild as HTMLElement;
 
     const dataId = element.getAttribute('data-id');
 

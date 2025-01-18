@@ -1,10 +1,13 @@
 import { createContext, ReactElement, useContext, useState } from 'react';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import {
   ComponentPropsI,
   DroppedComponentI,
   SidebarContextI,
 } from '@/types/component';
+
 
 const DEFAULT_VALUES: SidebarContextI = {
   droppedComponents: [],
@@ -24,6 +27,7 @@ const DEFAULT_VALUES: SidebarContextI = {
   handleUpdateComponent: (_id: string) => {},
   handleSubmitChanges: (_id: string) => {},
   getEditingComponentData: (_id: string) => {},
+  addChildCard: () => {},
 };
 
 const SidebarContext = createContext(DEFAULT_VALUES);
@@ -49,7 +53,7 @@ export const SidebarContextProvider = ({
 
     setDroppedComponents((prev) => [
       ...prev,
-      { id, componentName: name, props: componentProps },
+      { id, componentName: name, properties: componentProps },
     ]);
   };
 
@@ -61,17 +65,17 @@ export const SidebarContextProvider = ({
     e: React.DragEvent,
     id: string,
     name: string,
-    props: ComponentPropsI,
+    properties: ComponentPropsI,
   ) => {
     e.dataTransfer.setData('id', id);
     e.dataTransfer.setData('name', name);
-    e.dataTransfer.setData('componentProps', JSON.stringify(props));
+    e.dataTransfer.setData('componentProps', JSON.stringify(properties));
   };
 
   const handleUpdateComponent = (id: string, key: string, newValue: string) => {
     setEditingComponent((prev) =>
       prev.id === id
-        ? { ...prev, props: { ...prev.props, [key]: newValue } }
+        ? { ...prev, props: { ...prev.properties, [key]: newValue } }
         : prev,
     );
   };
@@ -80,6 +84,39 @@ export const SidebarContextProvider = ({
     setDroppedComponents((prev) =>
       prev.map((el) => (el.id === id ? { ...el, ...editingComponent } : el)),
     );
+  };
+
+  const addChildCard = () => {
+    const newCard = {
+      id: uuidv4(),
+      label: 'Placeholder Title',
+      text: 'Placeholder description',
+      properties: {},
+    };
+
+    const addChildrenRecursivly = (prev: Omit<DroppedComponentI, 'icon'>) => {
+      if (prev.properties.child) {
+        return {
+          ...prev,
+          properties: {
+            ...prev.properties,
+            child: prev.properties.child.map(addChildrenRecursivly),
+          },
+        };
+      } else {
+        return {
+          ...prev,
+          properties: {
+            ...prev.properties,
+            child: prev.properties.child
+              ? [...prev.properties.child, newCard]
+              : [newCard],
+          },
+        };
+      }
+    };
+
+    setEditingComponent((prev) => addChildrenRecursivly(prev));
   };
 
   const getEditingComponentData = (id: string) => {
@@ -94,6 +131,7 @@ export const SidebarContextProvider = ({
         droppedComponents,
         editingComponent,
         handleDrop,
+        addChildCard,
         handleDragOver,
         handleDragStart,
         handleSubmitChanges,

@@ -12,10 +12,24 @@ import { useModal } from '@/context/modal-context';
 import { useSidebarContext } from '@/context/sidebar-context';
 
 const COMPONENT_MAP: Record<string, ElementType> = {
-  button: ({ id, label, variant, props }) => (
-    <Button id={id} label={label} variants={variant} {...props} />
+  button: ({ id, label, variant, properties, props }) => (
+    <Button
+      id={id}
+      label={label}
+      variants={variant}
+      properties={properties}
+      {...props}
+    />
   ),
-  card: ({ id, props }) => <Card id={id} {...props} />,
+  card: ({ id, label, text, properties, props }) => (
+    <Card
+      id={id}
+      text={text}
+      label={label}
+      properties={properties}
+      {...props}
+    />
+  ),
 };
 
 const ComponentRender = () => {
@@ -27,14 +41,17 @@ const ComponentRender = () => {
     <>
       {droppedComponents.map((el) => {
         const Component = COMPONENT_MAP[el.componentName];
+        const { variant, label, text } = el.properties;
 
         return (
           <SectionWrapper key={el.id}>
             <span onContextMenu={(e) => handleContextMenu(e)}>
               <Component
                 id={el.id}
-                props={el.props}
-                variant={el.props.variant}
+                properties={el.properties}
+                label={label}
+                text={text}
+                variant={variant}
               />
             </span>
           </SectionWrapper>

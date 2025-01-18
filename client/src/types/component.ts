@@ -4,7 +4,7 @@ export interface ComponentI {
   id: string;
   name: string;
   icon: ReactNode;
-  props: ComponentPropsI;
+  properties: ComponentPropsI;
 }
 
 export interface DroppedComponentI extends ComponentPropsI {
@@ -25,6 +25,7 @@ export interface SidebarContextI {
   handleUpdateComponent: (id: string, key: string, newValue: string) => void;
   handleSubmitChanges: (id: string) => void;
   getEditingComponentData: (id: string) => void;
+  addChildCard: () => void;
 }
 
 export interface DragStartI {

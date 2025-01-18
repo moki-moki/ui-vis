@@ -41,7 +41,7 @@ const ModalRender = () => {
         <PopupComponent
           id={editingComponent.id}
           component={editingComponent}
-          label={editingComponent.props.label}
+          label={editingComponent.properties.label}
         />
       </div>
     </div>

@@ -12,7 +12,7 @@ const DEFAULT_COMPONENTS = [
     id: uuidv4(),
     name: 'button',
     icon: <CreditCard />,
-    props: {
+    properties: {
       label: 'Placeholder text',
       variant: 'default',
     },
@@ -21,9 +21,31 @@ const DEFAULT_COMPONENTS = [
     id: uuidv4(),
     name: 'card',
     icon: <CreditCard />,
-    props: {
-      title: 'Placeholder title',
+    properties: {
+      label: 'Placeholder title',
       text: 'Placeholder description',
+      // child: [
+      //   {
+      //     id: uuidv4(),
+      //     name: 'card',
+      //     icon: <CreditCard />,
+      //     properties: {
+      //       label: 'Placeholder title',
+      //       text: 'Placeholder description',
+      //       child: [
+      //         {
+      //           id: uuidv4(),
+      //           name: 'card',
+      //           icon: <CreditCard />,
+      //           properties: {
+      //             label: 'Placeholder title',
+      //             text: 'Placeholder description',
+      //           },
+      //         },
+      //       ],
+      //     },
+      //   },
+      // ],
     },
   },
 ];

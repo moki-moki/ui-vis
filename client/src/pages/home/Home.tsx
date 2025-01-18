@@ -1,8 +1,5 @@
-import { TimerIcon } from 'lucide-react';
-
 import ComponentRender from '@/components/component-render';
 import DropZone from '@/components/drop-zone';
-import Card from '@/components/ui/card';
 import SectionWrapper from '@/components/ui/section-wrapper';
 import { useSidebarContext } from '@/context/sidebar-context';
 
@@ -31,12 +28,11 @@ const Home = () => {
       </SectionWrapper>
       <SectionWrapper>
         <div className="flex justify-between items-center gap-5 my-10">
-          <Card
-            count={3}
-            title="Save Time"
+          {/* <Card
+            id={uuidv4()}
+            label="Save Time"
             text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsam consectetur non, blanditiis voluptate odit! Iusto quod quo quae accusamus."
-            icon={<TimerIcon size={80} />}
-          />
+          /> */}
         </div>
       </SectionWrapper>
       <SectionWrapper>

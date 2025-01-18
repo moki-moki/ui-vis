@@ -26,7 +26,7 @@ const ButtonPopup = ({
           </span>
           <Input
             onChange={() => handleUpdateComponent(id, 'variant', 'default')}
-            defaultChecked={component.props.variant === 'default'}
+            defaultChecked={component.properties.variant === 'default'}
             name="btnStyle"
             value="default"
             type="radio"
@@ -43,7 +43,7 @@ const ButtonPopup = ({
           </span>
           <Input
             onChange={() => handleUpdateComponent(id, 'variant', 'outlined')}
-            defaultChecked={component.props.variant === 'outlined'}
+            defaultChecked={component.properties.variant === 'outlined'}
             value="outlined"
             name="btnStyle"
             type="radio"

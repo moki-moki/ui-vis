@@ -1,5 +1,8 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import ComponentRender from '@/components/component-render';
 import DropZone from '@/components/drop-zone';
+import Card from '@/components/ui/card';
 import SectionWrapper from '@/components/ui/section-wrapper';
 import { useSidebarContext } from '@/context/sidebar-context';
 
@@ -27,12 +30,12 @@ const Home = () => {
         </div>
       </SectionWrapper>
       <SectionWrapper>
-        <div className="flex justify-between items-center gap-5 my-10">
-          {/* <Card
+        <div className="flex justify-center items-center gap-5 my-10">
+          <Card
             id={uuidv4()}
             label="Save Time"
             text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ipsam consectetur non, blanditiis voluptate odit! Iusto quod quo quae accusamus."
-          /> */}
+          />
         </div>
       </SectionWrapper>
       <SectionWrapper>

@@ -36,13 +36,14 @@ const Card = ({
             <p className="text-text-color text-start">{text}</p>
           </div>
         </div>
-        {properties.child &&
+
+        {properties?.child &&
           properties?.child.map((el: ComponentPropsI) => {
             return (
               <Card
                 key={uuidv4()}
-                text={el.properties.text}
-                label={el.properties.label}
+                text={el.text}
+                label={el.label}
                 properties={el.properties}
                 id={el.id}
                 icon={<TimerIcon size={80} />}

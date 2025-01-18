@@ -8,7 +8,6 @@ import {
   SidebarContextI,
 } from '@/types/component';
 
-
 const DEFAULT_VALUES: SidebarContextI = {
   droppedComponents: [],
   editingComponent: {},

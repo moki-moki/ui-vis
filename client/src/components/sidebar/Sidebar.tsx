@@ -24,28 +24,6 @@ const DEFAULT_COMPONENTS = [
     properties: {
       label: 'Placeholder title',
       text: 'Placeholder description',
-      // child: [
-      //   {
-      //     id: uuidv4(),
-      //     name: 'card',
-      //     icon: <CreditCard />,
-      //     properties: {
-      //       label: 'Placeholder title',
-      //       text: 'Placeholder description',
-      //       child: [
-      //         {
-      //           id: uuidv4(),
-      //           name: 'card',
-      //           icon: <CreditCard />,
-      //           properties: {
-      //             label: 'Placeholder title',
-      //             text: 'Placeholder description',
-      //           },
-      //         },
-      //       ],
-      //     },
-      //   },
-      // ],
     },
   },
 ];

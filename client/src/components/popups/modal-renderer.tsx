@@ -18,6 +18,11 @@ const ModalRender = () => {
 
   const { editingComponent, handleSubmitChanges } = useSidebarContext();
 
+  const submitModalHandler = (componentId: string) => {
+    handleSubmitChanges(componentId);
+    closeModal();
+  };
+
   const PopupComponent = ModalMap[editingComponent.componentName];
 
   return (
@@ -32,7 +37,7 @@ const ModalRender = () => {
           </Button>
           <Button
             className="hover:bg-secondary-color"
-            onClick={() => handleSubmitChanges(editingComponent.id)}
+            onClick={() => submitModalHandler(editingComponent.id)}
           >
             <Check />
           </Button>

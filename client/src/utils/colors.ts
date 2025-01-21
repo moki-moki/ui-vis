@@ -39,7 +39,7 @@ const generateOpacityColor = (baseColor: string, opacityValue: number) =>
   chroma(baseColor).alpha(opacityValue);
 
 export const generateScheme = (type: string): ColorsObj => {
-  type === 'all' ? (type = getRandomTypeColor()) : null;
+  if (type === 'all') type = getRandomTypeColor();
 
   const baseColor = chroma.random().hex();
 

@@ -42,8 +42,8 @@ const Card = ({
             return (
               <Card
                 key={uuidv4()}
-                text={el.text}
-                label={el.label}
+                text={el.properties.text}
+                label={el.properties.label}
                 properties={el.properties}
                 id={el.id}
                 icon={<TimerIcon size={80} />}

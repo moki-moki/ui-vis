@@ -48,10 +48,10 @@ const ComponentRender = () => {
             <span onContextMenu={(e) => handleContextMenu(e)}>
               <Component
                 id={el.id}
-                properties={el.properties}
-                label={label}
                 text={text}
+                label={label}
                 variant={variant}
+                properties={el.properties}
               />
             </span>
           </SectionWrapper>

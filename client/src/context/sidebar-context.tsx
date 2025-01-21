@@ -7,10 +7,14 @@ import {
   DroppedComponentI,
   SidebarContextI,
 } from '@/types/component';
+import { updateNestedObject } from '@/utils/utils';
 
 const DEFAULT_VALUES: SidebarContextI = {
   droppedComponents: [],
-  editingComponent: {},
+  editingComponent: {
+    id: '',
+    componentName: '',
+  },
   handleDrop: (_e: React.DragEvent) => {},
   handleDragOver: (_e: React.DragEvent) => {},
   handleDragStart: (
@@ -40,9 +44,10 @@ export const SidebarContextProvider = ({
     DroppedComponentI[]
   >([]);
 
-  const [editingComponent, setEditingComponent] = useState<
-    Omit<DroppedComponentI, 'icon'>
-  >({});
+  const [editingComponent, setEditingComponent] = useState<DroppedComponentI>({
+    id: '',
+    componentName: '',
+  });
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -72,11 +77,11 @@ export const SidebarContextProvider = ({
   };
 
   const handleUpdateComponent = (id: string, key: string, newValue: string) => {
-    setEditingComponent((prev) =>
-      prev.id === id
-        ? { ...prev, props: { ...prev.properties, [key]: newValue } }
-        : prev,
-    );
+    if (editingComponent) {
+      const newState = updateNestedObject(editingComponent, id, key, newValue);
+
+      if (newState) setEditingComponent(newState);
+    }
   };
 
   const handleSubmitChanges = (id: string) => {
@@ -88,12 +93,13 @@ export const SidebarContextProvider = ({
   const addChildCard = () => {
     const newCard = {
       id: uuidv4(),
-      label: 'Placeholder Title',
-      text: 'Placeholder description',
-      properties: {},
+      properties: {
+        label: 'Placeholder Title',
+        text: 'Placeholder description',
+      },
     };
 
-    const addChildrenRecursivly = (prev: Omit<DroppedComponentI, 'icon'>) => {
+    const addChildrenRecursivly = (prev: DroppedComponentI) => {
       if (prev.properties.child) {
         return {
           ...prev,
@@ -115,7 +121,7 @@ export const SidebarContextProvider = ({
       }
     };
 
-    setEditingComponent((prev) => addChildrenRecursivly(prev));
+    setEditingComponent((prev) => prev && addChildrenRecursivly(prev));
   };
 
   const getEditingComponentData = (id: string) => {

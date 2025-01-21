@@ -3,17 +3,18 @@ import { ReactNode } from 'react';
 export interface ComponentI {
   id: string;
   name: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   properties: ComponentPropsI;
 }
 
 export interface DroppedComponentI extends ComponentPropsI {
+  id: string;
   componentName: string;
 }
 
 export interface SidebarContextI {
   droppedComponents: DroppedComponentI[];
-  editingComponent: Omit<DroppedComponentI, 'icon'>;
+  editingComponent: DroppedComponentI;
   handleDrop: (_e: React.DragEvent) => void;
   handleDragOver: (_e: React.DragEvent) => void;
   handleDragStart: (

@@ -9,10 +9,10 @@ export const updateNestedObject = (
   obj: DroppedComponentI,
   id: string,
   key: string,
-  updates: string,
+  newValue: string,
 ) => {
   if (obj.id === id) {
-    return { ...obj, properties: { ...obj.properties, [key]: updates } };
+    return { ...obj, properties: { ...obj.properties, [key]: newValue } };
   }
 
   if (obj.properties.child) {
@@ -21,7 +21,7 @@ export const updateNestedObject = (
       properties: {
         ...obj.properties,
         child: obj.properties.child.map((el: DroppedComponentI) =>
-          updateNestedObject(el, id, key, updates),
+          updateNestedObject(el, id, key, newValue),
         ),
       },
     };

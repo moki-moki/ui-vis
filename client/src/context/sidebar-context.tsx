@@ -19,11 +19,9 @@ const DEFAULT_VALUES: SidebarContextI = {
   handleDragOver: (_e: React.DragEvent) => {},
   handleDragStart: (
     e: React.DragEvent,
-    id: string,
     name: string,
     props: ComponentPropsI,
   ) => {
-    e.dataTransfer.setData('id', id);
     e.dataTransfer.setData('name', name);
     e.dataTransfer.setData('componentProps', JSON.stringify(props));
   },
@@ -51,13 +49,12 @@ export const SidebarContextProvider = ({
 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
-    const id = e.dataTransfer.getData('id');
     const name = e.dataTransfer.getData('name');
     const componentProps = JSON.parse(e.dataTransfer.getData('componentProps'));
 
     setDroppedComponents((prev) => [
       ...prev,
-      { id, componentName: name, properties: componentProps },
+      { id: uuidv4(), componentName: name, properties: componentProps },
     ]);
   };
 
@@ -67,11 +64,9 @@ export const SidebarContextProvider = ({
 
   const handleDragStart = (
     e: React.DragEvent,
-    id: string,
     name: string,
     properties: ComponentPropsI,
   ) => {
-    e.dataTransfer.setData('id', id);
     e.dataTransfer.setData('name', name);
     e.dataTransfer.setData('componentProps', JSON.stringify(properties));
   };

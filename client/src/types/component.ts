@@ -19,7 +19,6 @@ export interface SidebarContextI {
   handleDragOver: (_e: React.DragEvent) => void;
   handleDragStart: (
     e: React.DragEvent,
-    id: string,
     name: string,
     props: ComponentPropsI,
   ) => void;

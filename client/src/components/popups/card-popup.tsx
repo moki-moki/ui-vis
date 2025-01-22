@@ -5,13 +5,15 @@ import { DroppedComponentI } from '@/types/component';
 const CardPopup = () => {
   const { editingComponent, addChildCard, handleUpdateComponent } =
     useSidebarContext();
-  const count = 0;
+  let count = 1;
+
+  const incrementCount = () => count++;
 
   const renderChildrenPopup = (
     child: Omit<DroppedComponentI, 'icon'>,
     count: number,
   ) => {
-    count += 1;
+    incrementCount();
     return child.map((el: Omit<DroppedComponentI, 'icon'>, idx: number) => (
       <div key={idx}>
         <div className="w-full h-0.5 rounded-full bg-accent-color mt-4 mb-2"></div>
@@ -90,15 +92,18 @@ const CardPopup = () => {
           }
         />
       </div>
-      <Button
-        className="outline-none hover:bg-secondary-color uppercase font-bold text-sm"
-        type="button"
-        onClick={addChildCard}
-      >
-        Add card
-      </Button>
       {editingComponent.properties.child &&
         renderChildrenPopup(editingComponent.properties.child, count)}
+
+      {count < 3 ? (
+        <Button
+          className="outline-none hover:bg-secondary-color uppercase font-bold text-sm"
+          type="button"
+          onClick={addChildCard}
+        >
+          Add card
+        </Button>
+      ) : null}
     </div>
   );
 };

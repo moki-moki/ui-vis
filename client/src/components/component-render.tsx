@@ -1,6 +1,7 @@
 import { ElementType } from 'react';
 
 import { createPortal } from 'react-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 import ContextMenu from '@/components/context-menu';
 import ModalRender from '@/components/popups/modal-renderer';
@@ -12,12 +13,12 @@ import { useModal } from '@/context/modal-context';
 import { useSidebarContext } from '@/context/sidebar-context';
 
 const COMPONENT_MAP: Record<string, ElementType> = {
-  button: ({ id, label, variant, properties, props }) => (
+  button: ({ id, label, variant, props }) => (
     <Button
+      key={uuidv4()}
       id={id}
       label={label}
       variants={variant}
-      properties={properties}
       {...props}
     />
   ),

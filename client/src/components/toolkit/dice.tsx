@@ -2,13 +2,13 @@ import { useState } from 'react';
 
 import { ArrowUp, Dice5 } from 'lucide-react';
 
-import { ColorTypes } from '@/types/colors';
+import { SelectedColorType } from '@/types/colors';
 
 import Button from '../ui/button';
 
 interface Props {
-  selected: ColorTypes;
-  generateColors: (type: ColorTypes) => void;
+  selected: SelectedColorType;
+  generateColors: (type: SelectedColorType) => void;
 }
 
 const Dice = ({ selected, generateColors }: Props) => {

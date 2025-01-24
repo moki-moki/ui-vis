@@ -1,11 +1,17 @@
 export interface ColorsI {
-  primary: string;
-  secondary: string;
   text: string;
   accent: string;
+  primary: string;
+  secondary: string;
+  background: string;
+  text_locked: boolean;
+  accent_locked: boolean;
+  primary_locked: boolean;
+  secondary_locked: boolean;
+  background_locked: boolean;
 }
 
-export type ColorTypes =
+export type SelectedColorType =
   | 'monochromatic'
   | 'complementary'
   | 'analogous'
@@ -13,3 +19,10 @@ export type ColorTypes =
   | 'split complementary'
   | 'triadic'
   | 'tetradic';
+
+export type ColorTypes =
+  | 'primary'
+  | 'secondary'
+  | 'accent'
+  | 'text'
+  | 'background';

@@ -1,16 +1,28 @@
 import { ChangeEvent } from 'react';
 
+import { Lock, LockOpen } from 'lucide-react';
+
+import { ColorTypes } from '@/types/colors';
+
 import { Input } from '../ui/input';
 
 interface Props {
   color: string;
-  type: 'primary' | 'secondary' | 'accent' | 'text' | 'background';
+  type: ColorTypes;
+  isLocked: boolean;
+  lockColorHandler: (type: ColorTypes) => void;
   changeColorHandler: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const ColorInput = ({ color, type, changeColorHandler }: Props) => {
+const ColorInput = ({
+  color,
+  type,
+  changeColorHandler,
+  isLocked,
+  lockColorHandler,
+}: Props) => {
   return (
-    <div>
+    <div className="relative">
       <span className="block uppercase text-sm font-bold tracking-wide">
         {type}
       </span>
@@ -29,6 +41,13 @@ const ColorInput = ({ color, type, changeColorHandler }: Props) => {
         type="color"
         className="bg-lime-700 hidden"
       />
+      <button
+        className="absolute left-1.5 bottom-1.5 text-teal-50 hover:cursor-pointer hover:bg-slate-400"
+        type="button"
+        onClick={() => lockColorHandler(type)}
+      >
+        {isLocked ? <Lock size={15} /> : <LockOpen size={15} />}
+      </button>
     </div>
   );
 };

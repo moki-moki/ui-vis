@@ -1,4 +1,4 @@
-import Sidebar from '@/components/sidebar/sidebar';
+import Sidebar from '@/components/sidebar/Sidebar';
 import Footer from '@/components/ui/footer';
 import { ContextMenuProvider } from '@/context/context-menu';
 import { ModalProvider } from '@/context/modal-context';

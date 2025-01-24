@@ -9,6 +9,11 @@ const keys = [
   'secondary',
   'accent',
   'secondary-faded',
+  'text_locked',
+  'accent_locked',
+  'primary_locked',
+  'secondary_locked',
+  'background_locked',
 ] as const;
 
 const ajustHue = (

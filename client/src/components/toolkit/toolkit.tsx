@@ -58,7 +58,7 @@ const Toolkit = () => {
   useKeyBind('R', () => generateColors(selected));
 
   return (
-    <div className="bg-white/40 border-2 border-accent-color backdrop-blur-lg p-5 flex justify-evenly items-center max-w-4xl m-auto fixed bottom-2 left-0 right-0 rounded-xl">
+    <div className="bg-white/40 border-2 border-accent-color backdrop-blur-lg p-5 flex justify-evenly items-end max-w-4xl m-auto fixed bottom-2 left-0 right-0 rounded-lg z-10">
       <ColorInput
         type="background"
         color={colors.background}

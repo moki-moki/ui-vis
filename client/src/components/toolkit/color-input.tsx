@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 
-import { Lock, LockOpen } from 'lucide-react';
+import { Lock, LockKeyhole, LockOpen } from 'lucide-react';
 
 import { ColorTypes } from '@/types/colors';
 
@@ -15,10 +15,10 @@ interface Props {
 }
 
 const ColorInput = ({
-  color,
   type,
-  changeColorHandler,
+  color,
   isLocked,
+  changeColorHandler,
   lockColorHandler,
 }: Props) => {
   return (
@@ -28,7 +28,7 @@ const ColorInput = ({
       </span>
       <label
         htmlFor={type}
-        className={`block w-24 h-10 rounded-xl cursor-pointer`}
+        className="block w-32 h-12 rounded-md cursor-pointer border-accent-color"
         style={{ backgroundColor: color }}
       >
         &nbsp;
@@ -39,14 +39,14 @@ const ColorInput = ({
         id={type}
         value={color}
         type="color"
-        className="bg-lime-700 hidden"
+        className="hidden "
       />
       <button
-        className="absolute left-1.5 bottom-1.5 text-teal-50 hover:cursor-pointer hover:bg-slate-400"
+        className="absolute text-lime-50 left-1.5 bottom-1.5 mix-blend-difference hover:cursor-pointer"
         type="button"
         onClick={() => lockColorHandler(type)}
       >
-        {isLocked ? <Lock size={15} /> : <LockOpen size={15} />}
+        {isLocked ? <LockKeyhole size={20} /> : <LockOpen size={20} />}
       </button>
     </div>
   );

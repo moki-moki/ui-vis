@@ -11,6 +11,7 @@ const ContextMenu = () => {
   const { openModal } = useModal();
 
   const ref = useRef(null);
+
   useClickOutside(ref, onClose);
 
   return (

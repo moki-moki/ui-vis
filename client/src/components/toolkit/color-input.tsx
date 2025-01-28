@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 
-import { Lock, LockKeyhole, LockOpen } from 'lucide-react';
+import { LockKeyhole, LockOpen } from 'lucide-react';
 
 import { ColorTypes } from '@/types/colors';
 

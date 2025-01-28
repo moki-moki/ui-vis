@@ -25,10 +25,8 @@ export const ContextMenuProvider = ({ children }: { children: ReactNode }) => {
   const handleContextMenu = (
     e: React.MouseEvent<HTMLSpanElement, globalThis.MouseEvent>,
   ) => {
-    e.stopPropagation();
     e.preventDefault();
     const { pageX, pageY } = e;
-    e.stopPropagation();
 
     const element = e.currentTarget.firstChild as HTMLElement;
 

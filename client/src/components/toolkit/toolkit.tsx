@@ -37,6 +37,7 @@ const Toolkit = () => {
 
   const generateColors = (type: SelectedColorType) => {
     const colorScheme = generateScheme(type);
+
     setSelected(type);
     setColors((prev) => {
       const newState = { ...prev };
